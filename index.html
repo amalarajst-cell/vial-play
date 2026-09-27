@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>VIAL PLAY - Test de Reacción Vial | GCBA</title>
+  <meta name="description" content="Juego interactivo de tiempo de reacción vial para stands de concientización y seguridad vial. Gerencia de Educación y Convivencia Vial - GCBA.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-container">
+    
+    <!-- Top Bar / Institutional Header -->
+    <header class="app-header">
+      <div class="header-institutional">
+        <div class="gcba-badge">
+          <!-- Official GCBA Inspired Shield & Typography -->
+          <svg class="gcba-logo-icon" viewBox="0 0 40 40" width="38" height="38" fill="none">
+            <rect width="40" height="40" rx="10" fill="#FED304"/>
+            <path d="M20 7L24 15H16L20 7Z" fill="#1C1B1F"/>
+            <path d="M12 18H28V22H12V18Z" fill="#1C1B1F"/>
+            <path d="M14 25H26L24 33H16L14 25Z" fill="#1C1B1F"/>
+            <circle cx="20" cy="20" r="14" stroke="#1C1B1F" stroke-width="2.2" stroke-dasharray="3 2" fill="none"/>
+          </svg>
+          <div class="gcba-text-block">
+            <span class="gcba-city">Buenos Aires Ciudad</span>
+            <span class="gcba-dep">DIRECCIÓN GENERAL DE SEGURIDAD VIAL</span>
+            <span class="gcba-subdep">GERENCIA DE EDUCACIÓN Y CONVIVENCIA VIAL</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="header-brand">
+        <div class="brand-logo">
+          <span class="brand-vial">VIAL</span>
+          <span class="brand-play">PLAY</span>
+          <span class="brand-tag">TEST</span>
+        </div>
+      </div>
+
+      <div class="header-actions">
+        <button id="btn-toggle-sound" class="icon-btn" title="Alternar Sonido" aria-label="Activar o desactivar sonido">
+          <svg id="icon-sound-on" viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
+            <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
+          </svg>
+          <svg id="icon-sound-off" class="hidden" viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
+            <path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/>
+          </svg>
+        </button>
+        <button id="btn-toggle-fullscreen" class="icon-btn" title="Pantalla Completa Stand" aria-label="Pantalla Completa">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
+            <path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/>
+          </svg>
+        </button>
+        <button id="btn-open-admin" class="icon-btn admin-btn" title="Panel de Administración" aria-label="Administración">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
+            <path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/>
+          </svg>
+          <span class="btn-label">Admin</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Content Area with Dynamic Views -->
+    <main class="app-main">
+
+      <!-- VIEW 1: REGISTRATION / PARTICIPANT LOGIN -->
+      <section id="view-login" class="screen-view active">
+        <div class="card-hero">
+          <div class="kiosk-welcome-badge">
+            <span class="pulse-dot"></span>
+            STAND DE CONCIENTIZACIÓN VIAL EN VIVO
+          </div>
+          <h1 class="hero-title">Test de Tiempo de Reacción</h1>
+          <p class="hero-subtitle">
+            Descubrí qué tan rápidos son tus reflejos y cómo cada milisegundo es decisivo para evitar siniestros viales.
+          </p>
+
+          <form id="form-participant" class="kiosk-form" novalidate>
+            <div class="input-group">
+              <label for="input-name">Nombre y Apellido <span class="required">*</span></label>
+              <div class="input-wrapper">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                  <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                </svg>
+                <input type="text" id="input-name" placeholder="Ej: Mateo González" autocomplete="off" required>
+              </div>
+            </div>
+
+            <div class="input-group">
+              <label for="input-email">Correo Electrónico <span class="required">*</span></label>
+              <div class="input-wrapper">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                  <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                </svg>
+                <input type="email" id="input-email" placeholder="Ej: mateo@ejemplo.com" autocomplete="off" required>
+              </div>
+            </div>
+
+            <div class="input-group">
+              <label for="select-role">¿Cómo te movés habitualmente por la ciudad?</label>
+              <div class="input-wrapper select-wrapper">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                  <path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.85 7h10.29l1.08 3.11H5.77L6.85 7zM19 17H5v-4.66l.12-.34h13.77l.11.34V17z"/>
+                </svg>
+                <select id="select-role">
+                  <option value="Conductor/a de Auto">Conductor/a de Auto</option>
+                  <option value="Motociclista">Motociclista</option>
+                  <option value="Ciclista">Ciclista</option>
+                  <option value="Peatón / Transporte Público">Peatón / Transporte Público</option>
+                  <option value="Monopatín / Movilidad Eléctrica">Monopatín / Movilidad Eléctrica</option>
+                </select>
+              </div>
+            </div>
+
+            <div id="form-error" class="form-error-msg hidden"></div>
+
+            <button type="submit" id="btn-submit-login" class="btn btn-primary btn-block btn-lg">
+              <span>Continuar al Test</span>
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
+                <path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/>
+              </svg>
+            </button>
+          </form>
+
+          <div class="quick-stats-footer">
+            <div class="stat-pill">
+              <span class="stat-icon">⚡</span>
+              <span>Test Oficial de Reflejos</span>
+            </div>
+            <div class="stat-pill">
+              <span class="stat-icon">⏱️</span>
+              <span>Duración: ~1 minuto</span>
+            </div>
+            <div class="stat-pill">
+              <span class="stat-icon">🛡️</span>
+              <span>Seguridad Vial GCBA</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- VIEW 2: BRIEFING / INSTRUCTIONS -->
+      <section id="view-briefing" class="screen-view">
+        <div class="card-briefing">
+          <div class="briefing-header">
+            <span class="badge-tag">INSTRUCCIONES DEL DESAFÍO</span>
+            <h2 id="briefing-welcome-name">¡Hola Participante!</h2>
+            <p class="briefing-lead">
+              En el tránsito real, el tiempo de reacción es el lapso que transcurre desde que tus ojos perciben un peligro hasta que tu pie presiona el pedal de freno.
+            </p>
+          </div>
+
+          <div class="instructions-grid">
+            <div class="instruction-card">
+              <div class="step-num">1</div>
+              <div class="step-icon">
+                <svg viewBox="0 0 24 24" width="34" height="34" fill="#FED304">
+                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+                </svg>
+              </div>
+              <h3>Atención al Semáforo</h3>
+              <p>La pantalla estará en modo espera. Mantenete concentrado y no te distraigas.</p>
+            </div>
+
+            <div class="instruction-card highlight">
+              <div class="step-num">2</div>
+              <div class="step-icon">
+                <svg viewBox="0 0 24 24" width="34" height="34" fill="#FF3B30">
+                  <path d="M12 2a10 10 0 1010 10A10 10 0 0012 2zm0 18a8 8 0 118-8 8 8 0 01-8 8zm-1-5h2v2h-2zm0-8h2v6h-2z"/>
+                </svg>
+              </div>
+              <h3>¡FRENÁ INMEDIATAMENTE!</h3>
+              <p>Apenas la luz cambie a <strong>ROJO</strong> o aparezca la señal de frenado, <strong>tocá la pantalla</strong> lo más rápido que puedas.</p>
+            </div>
+
+            <div class="instruction-card">
+              <div class="step-num">3</div>
+              <div class="step-icon">
+                <svg viewBox="0 0 24 24" width="34" height="34" fill="#00E676">
+                  <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                </svg>
+              </div>
+              <h3>3 Intentos</h3>
+              <p>Completarás <strong>3 intentos</strong> para calcular tu tiempo promedio y la distancia de frenado simulada.</p>
+            </div>
+          </div>
+
+          <div class="alert-box-warning">
+            <svg viewBox="0 0 24 24" width="24" height="24" fill="#FED304">
+              <path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/>
+            </svg>
+            <div>
+              <strong>¡Cuidado con anticiparte!</strong> Si tocás la pantalla antes de que cambie la luz, el intento se invalidará como falta de tránsito.
+            </div>
+          </div>
+
+          <div class="briefing-actions">
+            <button id="btn-back-to-login" class="btn btn-secondary">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+              </svg>
+              <span>Corregir Datos</span>
+            </button>
+            <button id="btn-start-test" class="btn btn-primary btn-xl">
+              <span>¡Comenzar el Test Ahora!</span>
+              <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+                <path d="M8 5v14l11-7z"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- VIEW 3: REACTION GAME ARENA -->
+      <section id="view-game" class="screen-view">
+        <div class="game-hud">
+          <div class="hud-participant">
+            <span class="hud-label">Participante</span>
+            <span id="hud-name" class="hud-value">-</span>
+          </div>
+
+          <div class="hud-attempts">
+            <span class="hud-label">Intento</span>
+            <div class="attempts-pills" id="attempts-indicator">
+              <span class="attempt-pill" data-attempt="1">1</span>
+              <span class="attempt-pill" data-attempt="2">2</span>
+              <span class="attempt-pill" data-attempt="3">3</span>
+            </div>
+          </div>
+
+          <div class="hud-best">
+            <span class="hud-label">Mejor Marca</span>
+            <span id="hud-best-time" class="hud-value">-- ms</span>
+          </div>
+        </div>
+
+        <!-- Interactive Reaction Surface -->
+        <div id="reaction-surface" class="reaction-surface state-ready" tabindex="0">
+          <div class="traffic-light-rig">
+            <div class="traffic-light-housing">
+              <div class="light-lens light-red" id="lens-red">
+                <div class="light-inner"></div>
+              </div>
+              <div class="light-lens light-yellow" id="lens-yellow">
+                <div class="light-inner"></div>
+              </div>
+              <div class="light-lens light-green" id="lens-green">
+                <div class="light-inner"></div>
+              </div>
+            </div>
+            <div class="traffic-post"></div>
+          </div>
+
+          <!-- Dynamic Prompts and Status Messages -->
+          <div class="reaction-content">
+            <div id="game-status-badge" class="game-badge">PREPARATE</div>
+            <h2 id="game-main-instruction" class="game-instruction">Tocá aquí para iniciar el intento</h2>
+            <p id="game-sub-instruction" class="game-sub">Mantené tu dedo listo o apoyado cerca</p>
+
+            <div id="game-timer-display" class="timer-display hidden">
+              <span id="game-timer-ms">0</span>
+              <span class="unit">ms</span>
+            </div>
+
+            <!-- Early Warning Sign -->
+            <div id="early-warning-box" class="warning-early-box hidden">
+              <svg viewBox="0 0 24 24" width="48" height="48" fill="#FF3B30">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+              </svg>
+              <h3>¡MUY PRONTO!</h3>
+              <p>Presionaste antes de la señal. Concentración: esperá la luz roja para frenar.</p>
+              <button id="btn-retry-early" class="btn btn-secondary btn-sm">Continuar</button>
+            </div>
+          </div>
+
+          <div class="touch-hint">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+              <path d="M9 11.24V7.5a2.5 2.5 0 0 1 5 0v3.74c1.21-.81 2-2.18 2-3.74C16 5.01 13.99 3 11.5 3S7 5.01 7 7.5c0 1.56.79 2.93 2 3.74zm9.84 4.63-4.54-2.26c-.17-.07-.35-.11-.54-.11H13v-6c0-.83-.67-1.5-1.5-1.5S10 6.67 10 7.5v10.74l-3.43-.72c-.08-.01-.15-.02-.24-.02-.31 0-.59.13-.79.33l-.79.8 4.94 4.94c.27.27.65.43 1.06.43h6.79c.75 0 1.33-.55 1.44-1.28l.75-5.27c.01-.06.01-.13.01-.2 0-.64-.39-1.21-.94-1.41z"/>
+            </svg>
+            <span>Podés hacer clic, tocar la pantalla o presionar la barra espaciadora</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- VIEW 4: RESULTS & ROAD SAFETY AWARENESS -->
+      <section id="view-results" class="screen-view">
+        <div class="card-results">
+          
+          <div class="results-header">
+            <span class="badge-tag">INFORME DE RENDIMIENTO VIAL</span>
+            <h2>Resultado de <span id="res-participant-name">Participante</span></h2>
+            <p class="results-date" id="res-datetime"></p>
+          </div>
+
+          <div class="results-score-banner">
+            <div class="score-main-box">
+              <span class="score-label">TIEMPO PROMEDIO DE REACCIÓN</span>
+              <div class="score-value-row">
+                <span id="res-avg-time" class="score-huge">0</span>
+                <span class="score-unit">milisegundos</span>
+              </div>
+              <div id="res-rating-badge" class="tier-badge tier-optimal">Reflejos Óptimos</div>
+            </div>
+
+            <div class="score-details-box">
+              <h4>Desglose por intento</h4>
+              <div class="attempts-breakdown">
+                <div class="breakdown-item">
+                  <span class="lbl">Intento 1</span>
+                  <span class="val" id="res-att-1">- ms</span>
+                </div>
+                <div class="breakdown-item">
+                  <span class="lbl">Intento 2</span>
+                  <span class="val" id="res-att-2">- ms</span>
+                </div>
+                <div class="breakdown-item">
+                  <span class="lbl">Intento 3</span>
+                  <span class="val" id="res-att-3">- ms</span>
+                </div>
+              </div>
+              <div class="breakdown-best">
+                <span>Mejor reacción:</span>
+                <strong id="res-best-time">- ms</strong>
+              </div>
+            </div>
+          </div>
+
+          <!-- Educational Road Safety Infographic: Stopping Distance -->
+          <div class="road-safety-analysis">
+            <div class="analysis-header">
+              <svg viewBox="0 0 24 24" width="24" height="24" fill="#FED304">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+              </svg>
+              <h3>¿Qué significa esto en la calle? Distancia de Reacción</h3>
+            </div>
+            <p class="analysis-desc">
+              Durante tu tiempo de reacción (<span id="res-desc-time">0</span> ms), tu vehículo se mueve <strong>completamente a ciegas</strong> antes de que los frenos empiecen a actuar.
+            </p>
+
+            <div class="distance-comparison-grid">
+              
+              <!-- Speed 40 km/h (Calle residencial) -->
+              <div class="dist-card">
+                <div class="dist-card-header">
+                  <span class="speed-pill">40 km/h</span>
+                  <span class="env-pill">Calle / Avenida</span>
+                </div>
+                <div class="dist-meters-row">
+                  <span id="dist-40-user" class="meters-num">0</span>
+                  <span class="meters-unit">metros recorridos</span>
+                </div>
+                <p class="dist-note">Equivale a aprox. <span id="dist-40-cars">0</span> autos estacionados uno tras otro.</p>
+                <div class="dist-progress-bar">
+                  <div id="bar-40-user" class="dist-fill" style="width: 30%;"></div>
+                </div>
+              </div>
+
+              <!-- Speed 60 km/h (Avenida rápida) -->
+              <div class="dist-card">
+                <div class="dist-card-header">
+                  <span class="speed-pill speed-high">60 km/h</span>
+                  <span class="env-pill">Avenida principal</span>
+                </div>
+                <div class="dist-meters-row">
+                  <span id="dist-60-user" class="meters-num">0</span>
+                  <span class="meters-unit">metros recorridos</span>
+                </div>
+                <p class="dist-note">Equivale a aprox. <span id="dist-60-cars">0</span> autos estacionados uno tras otro.</p>
+                <div class="dist-progress-bar">
+                  <div id="bar-60-user" class="dist-fill fill-danger" style="width: 50%;"></div>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="safety-tip-banner">
+              <span class="tip-icon">💡</span>
+              <p>
+                <strong>Dato Clave de Seguridad Vial:</strong> Si mirás el celular apenas 2 segundos mientras conducís a 60 km/h, recorrés <strong>más de 33 metros a ciegas</strong>. ¡Tus reflejos dependen 100% de tu atención!
+              </p>
+            </div>
+          </div>
+
+          <div class="results-actions">
+            <button id="btn-next-participant" class="btn btn-primary btn-xl">
+              <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+                <path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/>
+              </svg>
+              <span>Siguiente Participante</span>
+            </button>
+            <button id="btn-retry-test" class="btn btn-secondary">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                <path d="M17.65 6.35C16.2 4.9 14.21 4 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/>
+              </svg>
+              <span>Volver a Intentar</span>
+            </button>
+          </div>
+
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Institutional Footer -->
+    <footer class="app-footer">
+      <div class="footer-copy">
+        Gobierno de la Ciudad Autónoma de Buenos Aires &bull; Dirección General de Seguridad Vial &bull; Gerencia de Educación y Convivencia Vial
+      </div>
+    </footer>
+
+    <!-- ADMIN MODAL: PASSWORD LOGIN & CONTROL PANEL -->
+    <div id="modal-admin" class="modal-overlay hidden" role="dialog" aria-modal="true">
+      <div class="modal-box">
+        
+        <!-- ADMIN LOGIN STATE -->
+        <div id="admin-login-view" class="admin-state">
+          <div class="modal-header">
+            <div class="modal-title-wrap">
+              <svg viewBox="0 0 24 24" width="26" height="26" fill="#FED304">
+                <path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/>
+              </svg>
+              <h3>Acceso de Administrador - Stand</h3>
+            </div>
+            <button class="modal-close-btn" id="btn-close-admin-login" aria-label="Cerrar">&times;</button>
+          </div>
+
+          <p class="admin-instruction">
+            Ingresá la contraseña del stand para gestionar los registros, descargar la base de datos o reiniciar el sistema.
+          </p>
+
+          <form id="form-admin-auth">
+            <div class="input-group">
+              <label for="admin-password">Contraseña de Administrador</label>
+              <div class="input-wrapper">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                  <path d="M12.65 10C11.83 7.67 9.61 6 7 6c-3.31 0-6 2.69-6 6s2.69 6 6 6c2.61 0 4.83-1.67 5.65-4H17v4h4v-4h2v-4H12.65zM7 14c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/>
+                </svg>
+                <input type="password" id="admin-password" placeholder="Contraseña..." autocomplete="current-password" required>
+              </div>
+            </div>
+
+            <div id="admin-auth-error" class="form-error-msg hidden">Contraseña incorrecta. Por favor intente nuevamente.</div>
+
+            <div class="modal-btn-row">
+              <button type="button" class="btn btn-secondary" id="btn-cancel-admin">Cancelar</button>
+              <button type="submit" class="btn btn-primary">Ingresar al Panel</button>
+            </div>
+          </form>
+          <div class="admin-hint">Clave por defecto: <code>vial2026</code> (se puede cambiar dentro)</div>
+        </div>
+
+        <!-- ADMIN DASHBOARD STATE -->
+        <div id="admin-dashboard-view" class="admin-state hidden">
+          <div class="modal-header">
+            <div class="modal-title-wrap">
+              <span class="badge-tag">PANEL DE CONTROL</span>
+              <h3>Stand GCBA - Registros VIAL PLAY</h3>
+            </div>
+            <button class="modal-close-btn" id="btn-close-admin-dash" aria-label="Cerrar">&times;</button>
+          </div>
+
+          <!-- Quick Metrics Bar -->
+          <div class="admin-metrics-grid">
+            <div class="metric-card">
+              <span class="metric-num" id="stat-total-users">0</span>
+              <span class="metric-lbl">Participantes Totales</span>
+            </div>
+            <div class="metric-card">
+              <span class="metric-num" id="stat-avg-stand">0 ms</span>
+              <span class="metric-lbl">Promedio General</span>
+            </div>
+            <div class="metric-card">
+              <span class="metric-num text-success" id="stat-best-stand">0 ms</span>
+              <span class="metric-lbl">Récord del Stand</span>
+            </div>
+          </div>
+
+          <!-- Action Toolbar -->
+          <div class="admin-toolbar">
+            <div class="search-box">
+              <input type="text" id="admin-search-input" placeholder="Buscar por nombre o correo...">
+            </div>
+            <div class="admin-tool-buttons">
+              <button id="btn-export-csv" class="btn btn-success btn-sm">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                  <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/>
+                </svg>
+                <span>Descargar CSV / Excel</span>
+              </button>
+              <button id="btn-change-pwd" class="btn btn-secondary btn-sm">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                  <path d="M12.65 10C11.83 7.67 9.61 6 7 6c-3.31 0-6 2.69-6 6s2.69 6 6 6c2.61 0 4.83-1.67 5.65-4H17v4h4v-4h2v-4H12.65zM7 14c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/>
+                </svg>
+                <span>Cambiar Clave</span>
+              </button>
+              <button id="btn-clear-db" class="btn btn-danger btn-sm">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                  <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/>
+                </svg>
+                <span>Borrar Base</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Participants Table Container -->
+          <div class="admin-table-container">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Fecha/Hora</th>
+                  <th>Nombre y Apellido</th>
+                  <th>Correo Electrónico</th>
+                  <th>Rol Vial</th>
+                  <th>Promedio (ms)</th>
+                  <th>Mejor (ms)</th>
+                  <th>Intentos</th>
+                </tr>
+              </thead>
+              <tbody id="admin-table-body">
+                <!-- Dynamically filled -->
+              </tbody>
+            </table>
+            <div id="table-empty-msg" class="table-empty-msg hidden">No hay participantes registrados aún.</div>
+          </div>
+
+          <!-- Password change sub-form -->
+          <div id="pwd-change-container" class="pwd-box hidden">
+            <h4>Cambiar contraseña de administrador</h4>
+            <div class="pwd-row">
+              <input type="password" id="new-admin-password" placeholder="Nueva contraseña (mínimo 4 caracteres)">
+              <button id="btn-save-new-pwd" class="btn btn-primary btn-sm">Guardar</button>
+              <button id="btn-cancel-new-pwd" class="btn btn-secondary btn-sm">Cancelar</button>
+            </div>
+            <div id="pwd-change-msg" class="msg-small"></div>
+          </div>
+
+          <div class="admin-footer-row">
+            <button id="btn-admin-logout" class="btn btn-secondary">Cerrar Sesión Admin</button>
+            <button id="btn-kiosk-reset" class="btn btn-primary">Volver al Kiosco del Stand</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
