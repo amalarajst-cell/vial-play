@@ -1132,7 +1132,7 @@
   });
 
   // Touch shortcut for phone/tablet: 4 quick taps on BA VIAL logo
-  const gcbaBadge = document.getElementById('gcba-badge');
+  const gcbaBadge = document.getElementById('header-brand-block');
   let badgeTapCount = 0;
   let badgeTapTimeout = null;
   if (gcbaBadge) {
