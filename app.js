@@ -467,7 +467,6 @@
   const distanceTimeTag = document.getElementById('distance-time-tag');
 
   // Admin Modal DOM
-  const btnOpenAdmin = document.getElementById('btn-open-admin');
   const adminModal = document.getElementById('admin-modal');
   const btnCloseAdmin = document.getElementById('btn-close-admin');
   const adminAuthView = document.getElementById('admin-auth-view');
@@ -1104,25 +1103,74 @@
   }
 
   // ==========================================================================
-  // 11. ADMIN PANEL & CSV EXPORT
+  // 11. ADMIN PANEL, CONTROL + A SHORTCUT & CSV EXPORT
   // ==========================================================================
-  btnOpenAdmin.addEventListener('click', () => {
+  function openAdminModal() {
+    if (!adminModal) return;
     adminModal.classList.add('active');
-    inputAdminPass.value = '';
-    adminAuthError.style.display = 'none';
-    adminAuthView.style.display = 'flex';
-    adminContentView.style.display = 'none';
-  });
+    if (inputAdminPass) inputAdminPass.value = '';
+    if (adminAuthError) adminAuthError.style.display = 'none';
+    if (adminAuthView) adminAuthView.style.display = 'flex';
+    if (adminContentView) adminContentView.style.display = 'none';
+    setTimeout(() => {
+      if (inputAdminPass) inputAdminPass.focus();
+    }, 100);
+  }
 
-  btnCloseAdmin.addEventListener('click', () => {
-    adminModal.classList.remove('active');
-  });
-
-  adminModal.addEventListener('click', (e) => {
-    if (e.target === adminModal) {
-      adminModal.classList.remove('active');
+  // Keyboard shortcut: Control + A to access Admin with password
+  window.addEventListener('keydown', (e) => {
+    if ((e.ctrlKey || e.metaKey) && (e.key === 'a' || e.key === 'A')) {
+      const activeEl = document.activeElement;
+      // If typing in input, let normal select-all work only if text is selected, else open admin
+      if (activeEl && (activeEl.id === 'input-player-name' || activeEl.id === 'input-player-email')) {
+        // Allow select-all in inputs
+      } else {
+        e.preventDefault();
+        openAdminModal();
+      }
     }
   });
+
+  // Touch shortcut for phone/tablet: 4 quick taps on BA VIAL logo
+  const gcbaBadge = document.getElementById('gcba-badge');
+  let badgeTapCount = 0;
+  let badgeTapTimeout = null;
+  if (gcbaBadge) {
+    gcbaBadge.addEventListener('click', () => {
+      badgeTapCount++;
+      clearTimeout(badgeTapTimeout);
+      if (badgeTapCount >= 4) {
+        badgeTapCount = 0;
+        openAdminModal();
+      } else {
+        badgeTapTimeout = setTimeout(() => { badgeTapCount = 0; }, 1200);
+      }
+    });
+  }
+
+  // Submit on Enter key inside password input
+  if (inputAdminPass) {
+    inputAdminPass.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        btnSubmitAdminAuth.click();
+      }
+    });
+  }
+
+  if (btnCloseAdmin) {
+    btnCloseAdmin.addEventListener('click', () => {
+      adminModal.classList.remove('active');
+    });
+  }
+
+  if (adminModal) {
+    adminModal.addEventListener('click', (e) => {
+      if (e.target === adminModal) {
+        adminModal.classList.remove('active');
+      }
+    });
+  }
 
   btnSubmitAdminAuth.addEventListener('click', () => {
     const inputVal = inputAdminPass.value.trim();
