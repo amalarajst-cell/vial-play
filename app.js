@@ -1,8 +1,8 @@
 ﻿/**
  * ============================================================================
- * VIAL PLAY - TEST DE TIEMPO DE REACCIÃ“N
+ * VIAL PLAY - TEST DE TIEMPO DE REACCION
  * Mobile-First Road Safety Reaction Assessment | GCBA
- * ImplementaciÃ³n basada en el sistema de Ruleta Vial
+ * Implementacion basada en el sistema de Ruleta Vial
  * ============================================================================
  */
 
@@ -25,7 +25,7 @@
   };
 
   // ==========================================================================
-  // 2. PROCEDURAL WEB AUDIO SYNTHESIS (Zero External Audio Dependencies)
+  // 2. PROCEDURAL WEB AUDIO SYNTHESIS
   // ==========================================================================
   let audioEnabled = true;
   let audioCtx = null;
@@ -132,7 +132,7 @@
   // 3. STIMULI REPOSITORY (EXACT RULETA VIAL REACTION TEST)
   // ==========================================================================
 
-  // NIVEL 1: REFLEJOS CROMÃTICOS (4 COLORES)
+  // NIVEL 1: REFLEJOS CROMATICOS (4 COLORES)
   const STIMULI_LVL1_COLORS = [
     {
       id: 'rojo',
@@ -141,9 +141,9 @@
       colorName: 'ROJO',
       hex: '#ff1744',
       categoryClass: 'cat-color-rojo',
-      categoryName: 'SeÃ±al CromÃ¡tica',
+      categoryName: 'Se\u00F1al Crom\u00E1tica',
       title: 'COLOR ROJO',
-      desc: 'Â¡PresionÃ¡ rÃ¡pidamente el botÃ³n ROJO!',
+      desc: '\u00A1Presion\u00E1 r\u00E1pidamente el bot\u00F3n ROJO!',
       visualHtml: '<div class="color-orb" style="background:#ff1744;box-shadow:0 0 35px #ff1744;"></div>'
     },
     {
@@ -153,9 +153,9 @@
       colorName: 'AMARILLO',
       hex: '#ffc107',
       categoryClass: 'cat-color-amarillo',
-      categoryName: 'SeÃ±al CromÃ¡tica',
+      categoryName: 'Se\u00F1al Crom\u00E1tica',
       title: 'COLOR AMARILLO',
-      desc: 'Â¡PresionÃ¡ rÃ¡pidamente el botÃ³n AMARILLO!',
+      desc: '\u00A1Presion\u00E1 r\u00E1pidamente el bot\u00F3n AMARILLO!',
       visualHtml: '<div class="color-orb" style="background:#ffc107;box-shadow:0 0 35px #ffc107;"></div>'
     },
     {
@@ -165,9 +165,9 @@
       colorName: 'VERDE',
       hex: '#00e676',
       categoryClass: 'cat-color-verde',
-      categoryName: 'SeÃ±al CromÃ¡tica',
+      categoryName: 'Se\u00F1al Crom\u00E1tica',
       title: 'COLOR VERDE',
-      desc: 'Â¡PresionÃ¡ rÃ¡pidamente el botÃ³n VERDE!',
+      desc: '\u00A1Presion\u00E1 r\u00E1pidamente el bot\u00F3n VERDE!',
       visualHtml: '<div class="color-orb" style="background:#00e676;box-shadow:0 0 35px #00e676;"></div>'
     },
     {
@@ -177,9 +177,9 @@
       colorName: 'AZUL',
       hex: '#2979ff',
       categoryClass: 'cat-color-azul',
-      categoryName: 'SeÃ±al CromÃ¡tica',
+      categoryName: 'Se\u00F1al Crom\u00E1tica',
       title: 'COLOR AZUL',
-      desc: 'Â¡PresionÃ¡ rÃ¡pidamente el botÃ³n AZUL!',
+      desc: '\u00A1Presion\u00E1 r\u00E1pidamente el bot\u00F3n AZUL!',
       visualHtml: '<div class="color-orb" style="background:#2979ff;box-shadow:0 0 35px #2979ff;"></div>'
     }
   ];
@@ -192,9 +192,9 @@
       action: 'frenar',
       actionLabel: 'FRENAR',
       categoryClass: 'cat-frenar',
-      categoryName: 'Reglamentaria de DetenciÃ³n',
-      title: 'SEÃ‘AL DE PARE',
-      desc: 'DetenciÃ³n total obligatoria antes de ingresar a la intersecciÃ³n.',
+      categoryName: 'Reglamentaria de Detenci\u00F3n',
+      title: 'SE\u00D1AL DE PARE',
+      desc: 'Detenci\u00F3n total obligatoria antes de ingresar a la intersecci\u00F3n.',
       visualHtml: '<div class="sign-pare"><span>PARE</span></div>'
     },
     {
@@ -202,9 +202,9 @@
       action: 'frenar',
       actionLabel: 'FRENAR',
       categoryClass: 'cat-frenar',
-      categoryName: 'SemÃ¡foro Vial',
+      categoryName: 'Sem\u00E1foro Vial',
       title: 'LUZ ROJA',
-      desc: 'DetenciÃ³n inmediata en la lÃ­nea de frenado reglamentaria.',
+      desc: 'Detenci\u00F3n inmediata en la l\u00EDnea de frenado reglamentaria.',
       visualHtml: '<div style="width:58px;height:74px;background:#202628;border-radius:14px;border:2.5px solid #333;display:flex;flex-direction:column;align-items:center;justify-content:space-around;padding:4px 0;"><div style="width:18px;height:18px;border-radius:50%;background:#ff1744;box-shadow:0 0 14px #ff1744;"></div><div style="width:16px;height:16px;border-radius:50%;background:#332900;"></div><div style="width:16px;height:16px;border-radius:50%;background:#0a2915;"></div></div>'
     },
     {
@@ -213,7 +213,7 @@
       actionLabel: 'FRENAR',
       categoryClass: 'cat-frenar',
       categoryName: 'Prioridad Peatonal',
-      title: 'PEATÃ“N EN SENDA',
+      title: 'PEAT\u00D3N EN SENDA',
       desc: 'Persona cruzando en la senda peatonal. Prioridad de paso absoluta.',
       visualHtml: '<div class="sign-pare" style="background:#b71c1c;"><span class="material-symbols-outlined" style="font-size:32px;">directions_walk</span></div>'
     },
@@ -224,8 +224,8 @@
       action: 'acelerador',
       actionLabel: 'SOLTAR ACELERADOR',
       categoryClass: 'cat-acelerador',
-      categoryName: 'Reductor FÃ­sico',
-      title: 'LOMO DE BURRO PRÃ“XIMO',
+      categoryName: 'Reductor F\u00EDsico',
+      title: 'LOMO DE BURRO PR\u00D3XIMO',
       desc: 'Disminuir la velocidad levantando el pie del acelerador antes del resalto.',
       visualHtml: '<div class="sign-preventiva"><span class="material-symbols-outlined" style="font-size:32px;">waves</span></div>'
     },
@@ -236,7 +236,7 @@
       categoryClass: 'cat-acelerador',
       categoryName: 'Entorno Escolar',
       title: 'ZONA ESCOLAR (20 KM/H)',
-      desc: 'Alumnado en veredas. Desacelerar con anticipaciÃ³n a velocidad precautoria.',
+      desc: 'Alumnado en veredas. Desacelerar con anticipaci\u00F3n a velocidad precautoria.',
       visualHtml: '<div class="sign-preventiva"><span class="material-symbols-outlined" style="font-size:32px;">school</span></div>'
     },
     {
@@ -266,7 +266,7 @@
       action: 'esquivar',
       actionLabel: 'ESQUIVAR',
       categoryClass: 'cat-esquivar',
-      categoryName: 'ObstrucciÃ³n de Carril',
+      categoryName: 'Obstrucci\u00F3n de Carril',
       title: 'CONOS DE OBRA ADELANTE',
       desc: 'Carril clausurado. Maniobrar y abrirse al carril contiguo con baliza/giro.',
       visualHtml: '<div class="sign-maniobra"><span class="material-symbols-outlined" style="font-size:32px;">traffic</span></div>'
@@ -298,9 +298,9 @@
       action: 'omitir',
       actionLabel: 'OMITIR / SEGUIR',
       categoryClass: 'cat-omitir',
-      categoryName: 'SeÃ±al Informativa',
+      categoryName: 'Se\u00F1al Informativa',
       title: 'ESTACIONAMIENTO PERMITIDO',
-      desc: 'Ãrea habilitada para estacionar. La calzada principal continÃºa libre.',
+      desc: '\u00C1rea habilitada para estacionar. La calzada principal contin\u00FAa libre.',
       visualHtml: '<div class="sign-informativa"><span class="material-symbols-outlined" style="font-size:32px;">local_parking</span></div>'
     },
     {
@@ -308,26 +308,26 @@
       action: 'omitir',
       actionLabel: 'OMITIR / SEGUIR',
       categoryClass: 'cat-omitir',
-      categoryName: 'SeÃ±al Fin de RestricciÃ³n',
+      categoryName: 'Se\u00F1al Fin de Restricci\u00F3n',
       title: 'FIN DE ZONA DE OBRAS',
       desc: 'Restricciones levantadas. Omitir maniobra y continuar a velocidad legal.',
       visualHtml: '<div class="sign-informativa"><span class="material-symbols-outlined" style="font-size:32px;">check_circle</span></div>'
     }
   ];
 
-  // NIVEL 3: DISTRACCIÃ“N COGNITIVA AL VOLANTE (Eventos con distractor de WhatsApp / Celular)
+  // NIVEL 3: DISTRACCION COGNITIVA AL VOLANTE
   const STIMULI_LVL3_DISTRACTION = [
     {
       id: 'pelota_nino',
       action: 'frenar',
       actionLabel: 'FRENAR URGENTE',
       hasDistraction: true,
-      waSender: 'Instagram â€¢ NotificaciÃ³n',
-      waMessage: 'ðŸ“± @amigo te etiquetÃ³ en un video nuevo',
+      waSender: 'Instagram \u2022 Notificaci\u00F3n',
+      waMessage: '\uD83D\uDCF1 @amigo te etiquet\u00F3 en un video nuevo',
       categoryClass: 'cat-frenar',
-      categoryName: 'Peligro CrÃ­tico con Celular',
-      title: 'Â¡PELOTA Y NIÃ‘O CRUZANDO!',
-      desc: 'Â¡Una pelota cruzÃ³ rodando y viene un niÃ±o detrÃ¡s! Â¡Freno a fondo!',
+      categoryName: 'Peligro Cr\u00EDtico con Celular',
+      title: '\u00A1PELOTA Y NI\u00D1O CRUZANDO!',
+      desc: '\u00A1Una pelota cruz\u00F3 rodando y viene un ni\u00F1o detr\u00E1s! \u00A1Freno a fondo!',
       visualHtml: '<div class="sign-pare" style="background:#b71c1c;"><span class="material-symbols-outlined" style="font-size:32px;">sports_soccer</span></div>'
     },
     {
@@ -335,12 +335,12 @@
       action: 'frenar',
       actionLabel: 'FRENAR URGENTE',
       hasDistraction: true,
-      waSender: 'WhatsApp â€¢ Amigo',
-      waMessage: 'Â¿DÃ³nde estÃ¡s? Â¡Ya arrancÃ³ la previa!',
+      waSender: 'WhatsApp \u2022 Amigo',
+      waMessage: '\u00BFD\u00F3nde est\u00E1s? \u00A1Ya arranc\u00F3 la previa!',
       categoryClass: 'cat-frenar',
       categoryName: 'Frenada Brusca Adelante',
       title: 'COLECTIVO CLAVA LOS FRENOS',
-      desc: 'El transporte pÃºblico que va adelante frena de golpe sin aviso previo.',
+      desc: 'El transporte p\u00FAblico que va adelante frena de golpe sin aviso previo.',
       visualHtml: '<div class="sign-pare" style="background:#b71c1c;"><span class="material-symbols-outlined" style="font-size:32px;">directions_bus</span></div>'
     },
     {
@@ -349,7 +349,7 @@
       actionLabel: 'SOLTAR ACELERADOR',
       hasDistraction: false,
       categoryClass: 'cat-acelerador',
-      categoryName: 'TrÃ¡nsito Denso (Atento)',
+      categoryName: 'Tr\u00E1nsito Denso (Atento)',
       title: 'MOTO CAMBIANDO DE CARRIL',
       desc: 'Repartidor en moto se incorpora a tu carril con espacio justo.',
       visualHtml: '<div class="sign-preventiva"><span class="material-symbols-outlined" style="font-size:32px;">two_wheeler</span></div>'
@@ -359,10 +359,10 @@
       action: 'frenar',
       actionLabel: 'FRENAR URGENTE',
       hasDistraction: true,
-      waSender: 'TikTok â€¢ Tendencia',
-      waMessage: 'ðŸ”´ TransmisiÃ³n en vivo recomendada...',
+      waSender: 'TikTok \u2022 Tendencia',
+      waMessage: '\uD83D\uDD34 Transmisi\u00F3n en vivo recomendada...',
       categoryClass: 'cat-frenar',
-      categoryName: 'ObstÃ¡culo Imprevisto',
+      categoryName: 'Obst\u00E1culo Imprevisto',
       title: 'PERRO SUELTO EN CALZADA',
       desc: 'Mascota asustada cruzando la avenida en plena noche.',
       visualHtml: '<div class="sign-pare" style="background:#b71c1c;"><span class="material-symbols-outlined" style="font-size:32px;">pets</span></div>'
@@ -373,9 +373,9 @@
       actionLabel: 'ESQUIVAR',
       hasDistraction: false,
       categoryClass: 'cat-esquivar',
-      categoryName: 'Imprevisto en VÃ­a',
-      title: 'RAMA DE ÃRBOL CAÃDA',
-      desc: 'Temporal derribÃ³ una rama grande ocupando medio carril.',
+      categoryName: 'Imprevisto en V\u00EDa',
+      title: 'RAMA DE \u00C1RBOL CA\u00CDDA',
+      desc: 'Temporal derrib\u00F3 una rama grande ocupando medio carril.',
       visualHtml: '<div class="sign-maniobra"><span class="material-symbols-outlined" style="font-size:32px;">park</span></div>'
     },
     {
@@ -383,12 +383,12 @@
       action: 'frenar',
       actionLabel: 'FRENAR URGENTE',
       hasDistraction: true,
-      waSender: 'Llamada Entrante â€¢ MamÃ¡',
-      waMessage: 'ðŸ“ž Sonando en altavoz...',
+      waSender: 'Llamada Entrante \u2022 Mam\u00E1',
+      waMessage: '\uD83D\uDCDE Sonando en altavoz...',
       categoryClass: 'cat-frenar',
       categoryName: 'Llamada al Volante',
-      title: 'CAMIÃ“N DE BASURA DETENIDO',
-      desc: 'VehÃ­culo recolector detenido a oscuras doblando la esquina.',
+      title: 'CAMI\u00D3N DE BASURA DETENIDO',
+      desc: 'Veh\u00EDculo recolector detenido a oscuras doblando la esquina.',
       visualHtml: '<div class="sign-pare" style="background:#b71c1c;"><span class="material-symbols-outlined" style="font-size:32px;">local_shipping</span></div>'
     }
   ];
@@ -526,7 +526,6 @@
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
-  // Handle Login form
   formLogin.addEventListener('submit', (e) => {
     e.preventDefault();
     const name = inputPlayerName.value.trim();
@@ -551,7 +550,6 @@
     showSection('test');
   });
 
-  // Logout / Switch Player
   function handleLogout() {
     currentPlayer.isLoggedIn = false;
     localStorage.removeItem(STORAGE_NAME);
@@ -561,7 +559,6 @@
   if (btnBackLogin) btnBackLogin.addEventListener('click', handleLogout);
   if (headerPlayerChip) headerPlayerChip.addEventListener('click', handleLogout);
 
-  // Sound toggle
   btnToggleSound.addEventListener('click', () => {
     audioEnabled = !audioEnabled;
     if (audioEnabled) {
@@ -604,13 +601,13 @@
           <span class="btn-key-hint">R</span>
           <div class="btn-action-icon-circle"><span class="material-symbols-outlined">circle</span></div>
           <span class="btn-action-title">Rojo</span>
-          <span class="btn-action-sub">DetenciÃ³n</span>
+          <span class="btn-action-sub">Detenci\u00F3n</span>
         </button>
         <button type="button" class="btn-action btn-color-amarillo disabled" data-action="amarillo" id="btn-act-2">
           <span class="btn-key-hint">A</span>
           <div class="btn-action-icon-circle"><span class="material-symbols-outlined">circle</span></div>
           <span class="btn-action-title">Amarillo</span>
-          <span class="btn-action-sub">PrecauciÃ³n</span>
+          <span class="btn-action-sub">Precauci\u00F3n</span>
         </button>
         <button type="button" class="btn-action btn-color-verde disabled" data-action="verde" id="btn-act-3">
           <span class="btn-key-hint">V</span>
@@ -622,7 +619,7 @@
           <span class="btn-key-hint">Z</span>
           <div class="btn-action-icon-circle"><span class="material-symbols-outlined">circle</span></div>
           <span class="btn-action-title">Azul</span>
-          <span class="btn-action-sub">InformaciÃ³n</span>
+          <span class="btn-action-sub">Informaci\u00F3n</span>
         </button>
       `;
     } else {
@@ -631,25 +628,25 @@
           <span class="btn-key-hint">F</span>
           <div class="btn-action-icon-circle"><span class="material-symbols-outlined">front_hand</span></div>
           <span class="btn-action-title">Frenar</span>
-          <span class="btn-action-sub">PARE â€¢ Rojo â€¢ PeatÃ³n</span>
+          <span class="btn-action-sub">PARE \u2022 Rojo \u2022 Peat\u00F3n</span>
         </button>
         <button type="button" class="btn-action btn-vial-acelerador disabled" data-action="acelerador" id="btn-act-2">
           <span class="btn-key-hint">S</span>
           <div class="btn-action-icon-circle"><span class="material-symbols-outlined">speed</span></div>
           <span class="btn-action-title">Soltar Pedal</span>
-          <span class="btn-action-sub">Lomo â€¢ Escuela â€¢ Curva</span>
+          <span class="btn-action-sub">Lomo \u2022 Escuela \u2022 Curva</span>
         </button>
         <button type="button" class="btn-action btn-vial-esquivar disabled" data-action="esquivar" id="btn-act-3">
           <span class="btn-key-hint">E</span>
           <div class="btn-action-icon-circle"><span class="material-symbols-outlined">alt_route</span></div>
           <span class="btn-action-title">Esquivar</span>
-          <span class="btn-action-sub">Conos â€¢ Bache â€¢ Ciclista</span>
+          <span class="btn-action-sub">Conos \u2022 Bache \u2022 Ciclista</span>
         </button>
         <button type="button" class="btn-action btn-vial-omitir disabled" data-action="omitir" id="btn-act-4">
           <span class="btn-key-hint">O</span>
           <div class="btn-action-icon-circle"><span class="material-symbols-outlined">check_circle</span></div>
           <span class="btn-action-title">Omitir</span>
-          <span class="btn-action-sub">Informativa â€¢ Seguir</span>
+          <span class="btn-action-sub">Informativa \u2022 Seguir</span>
         </button>
       `;
     }
@@ -682,7 +679,7 @@
     if (!hint) {
       hint = document.createElement('div');
       hint.className = 'shuffle-hint';
-      hint.textContent = 'âš ï¸ BOTONES MEZCLADOS';
+      hint.textContent = '\u26A0\uFE0F BOTONES MEZCLADOS';
       actionsGrid.appendChild(hint);
     }
     actionsGrid.classList.add('show-hint');
@@ -780,7 +777,7 @@
         dot.classList.add('active');
       }
     }
-    roundBadge.textContent = `ESTÃMULO ${Math.min(currentRoundIdx + 1, totalRoundsForLevel)} / ${totalRoundsForLevel}`;
+    roundBadge.innerHTML = 'EST\u00CDMULO ' + Math.min(currentRoundIdx + 1, totalRoundsForLevel) + ' / ' + totalRoundsForLevel;
   }
 
   function setIdleState() {
@@ -789,27 +786,27 @@
     distractionPopup.style.display = 'none';
 
     if (currentLevel === 1) {
-      catBadgeText.textContent = 'NIVEL 1 â€¢ REFLEJOS CROMÃTICOS';
+      catBadgeText.textContent = 'NIVEL 1 \u2022 REFLEJOS CROM\u00C1TICOS';
       stimulusVisual.innerHTML = '<div class="color-orb" style="background:#ff1744;box-shadow:0 0 25px #ff1744;"></div>';
-      stimulusTitle.textContent = 'REACCIÃ“N A COLORES';
-      stimulusDesc.innerHTML = 'AparecerÃ¡ un color sorpresa. PresionÃ¡ el botÃ³n correspondiente <strong>lo mÃ¡s rÃ¡pido posible</strong>.';
+      stimulusTitle.textContent = 'REACCI\u00D3N A COLORES';
+      stimulusDesc.innerHTML = 'Aparecer\u00E1 un color sorpresa. Presion\u00E1 el bot\u00F3n correspondiente <strong>lo m\u00E1s r\u00E1pido posible</strong>.';
     } else if (currentLevel === 2) {
-      catBadgeText.textContent = 'NIVEL 2 â€¢ TOMA DE DECISIONES VIALES';
+      catBadgeText.textContent = 'NIVEL 2 \u2022 TOMA DE DECISIONES VIALES';
       stimulusVisual.innerHTML = '<div class="sign-pare"><span>PARE</span></div>';
       stimulusTitle.textContent = '4 DECISIONES EN CALLE';
-      stimulusDesc.innerHTML = 'FRENAR, SOLTAR ACELERADOR, ESQUIVAR U OMITIR segÃºn la situaciÃ³n vial imprevista.';
+      stimulusDesc.innerHTML = 'FRENAR, SOLTAR ACELERADOR, ESQUIVAR U OMITIR seg\u00FAn la situaci\u00F3n vial imprevista.';
     } else if (currentLevel === 3) {
-      catBadgeText.textContent = 'NIVEL 3 â€¢ DISTRACCIÃ“N AL VOLANTE';
+      catBadgeText.textContent = 'NIVEL 3 \u2022 DISTRACCI\u00D3N AL VOLANTE';
       stimulusVisual.innerHTML = '<div class="sign-pare" style="background:#b71c1c;"><span class="material-symbols-outlined" style="font-size:36px;">smartphone</span></div>';
       stimulusTitle.textContent = 'PELIGRO + DISTRACTOR';
-      stimulusDesc.innerHTML = 'Simulamos notificaciones y celular mientras conducÃ­s. <strong>Â¡MantenÃ© los ojos en la calzada!</strong>';
+      stimulusDesc.innerHTML = 'Simulamos notificaciones y celular mientras conduc\u00EDs. <strong>\u00A1Manten\u00E9 los ojos en la calzada!</strong>';
     }
 
     if (btnStartGameCta) btnStartGameCta.style.display = 'inline-flex';
     liveTimerBadge.style.display = 'none';
     feedbackBanner.style.display = 'none';
     cardTimerFill.style.transform = 'scaleX(0)';
-    roundStateText.textContent = 'TocÃ¡ para arrancar';
+    roundStateText.textContent = 'Toc\u00E1 para arrancar';
     setButtonsEnabled(false);
   }
 
@@ -828,14 +825,14 @@
   function startRoundWaiting() {
     state = 'waiting';
     updateDots();
-    roundStateText.textContent = 'Â¡Atento al estÃ­mulo!...';
+    roundStateText.textContent = '\u00A1Atento al est\u00EDmulo!...';
     distractionPopup.style.display = 'none';
 
     stimulusCard.className = 'stimulus-card state-waiting';
     catBadgeText.textContent = currentLevel === 1 ? 'ESPERANDO COLOR' : 'OBSERVANDO CALZADA';
     stimulusVisual.innerHTML = '<div style="width:68px;height:68px;border-radius:50%;background:rgba(255,160,0,0.15);display:flex;align-items:center;justify-content:center;color:var(--accent-amber);"><span class="material-symbols-outlined" style="font-size:36px;">explore</span></div>';
     stimulusTitle.textContent = 'PREPARATE...';
-    stimulusDesc.textContent = 'No toques ningÃºn botÃ³n antes de ver el estÃ­mulo. Â¡No te adelantes!';
+    stimulusDesc.textContent = 'No toques ning\u00FAn bot\u00F3n antes de ver el est\u00EDmulo. \u00A1No te adelantes!';
     if (btnStartGameCta) btnStartGameCta.style.display = 'none';
     liveTimerBadge.style.display = 'none';
     feedbackBanner.style.display = 'none';
@@ -863,15 +860,15 @@
     }
 
     stimulusCard.className = 'stimulus-card state-active';
-    stimulusCatBadge.className = `stimulus-category-badge ${currentStimulus.categoryClass || ''}`;
-    catBadgeText.textContent = currentStimulus.categoryName || 'ESTÃMULO ACTIVO';
+    stimulusCatBadge.className = 'stimulus-category-badge ' + (currentStimulus.categoryClass || '');
+    catBadgeText.textContent = currentStimulus.categoryName || 'EST\u00CDMULO ACTIVO';
     stimulusVisual.innerHTML = currentStimulus.visualHtml;
     stimulusTitle.textContent = currentStimulus.title;
     stimulusDesc.textContent = currentStimulus.desc;
 
     if (currentLevel === 3 && currentStimulus.hasDistraction) {
       waSender.textContent = currentStimulus.waSender;
-      waText.textContent = `"${currentStimulus.waMessage}"`;
+      waText.textContent = '"' + currentStimulus.waMessage + '"';
       distractionPopup.style.display = 'flex';
       playSound('distraction_wa');
     } else {
@@ -883,7 +880,7 @@
     liveTimerBadge.textContent = '0.00 s';
     feedbackBanner.style.display = 'none';
 
-    roundStateText.textContent = 'Â¡REACCIONÃ AHORA!';
+    roundStateText.textContent = '\u00A1REACCION\u00C1 AHORA!';
     runLiveTimer();
 
     clearTimeout(timeoutWatchdog);
@@ -921,8 +918,8 @@
 
       state = 'feedback';
       stimulusCard.className = 'stimulus-card state-early';
-      stimulusTitle.textContent = 'Â¡TE ADELANTASTE!';
-      stimulusDesc.textContent = 'Presionaste antes de que apareciera el estÃ­mulo. En el trÃ¡nsito, anticipar maniobras sin mirar causa siniestros.';
+      stimulusTitle.textContent = '\u00A1TE ADELANTASTE!';
+      stimulusDesc.textContent = 'Presionaste antes de que apareciera el est\u00EDmulo. En el tr\u00E1nsito, anticipar maniobras sin mirar causa siniestros.';
       feedbackBanner.className = 'feedback-banner wrong';
       feedbackBanner.style.display = 'inline-flex';
       feedbackIcon.textContent = 'warning';
@@ -964,21 +961,21 @@
       feedbackBanner.className = 'feedback-banner correct';
       feedbackBanner.style.display = 'inline-flex';
       feedbackIcon.textContent = 'check_circle';
-      feedbackText.textContent = `Â¡EXCELENTE! Reaccionaste en ${reactionTimeSec.toFixed(2)} s`;
+      feedbackText.textContent = '\u00A1EXCELENTE! Reaccionaste en ' + reactionTimeSec.toFixed(2) + ' s';
     } else if (isTimeout) {
       playSound('wrong');
       stimulusCard.className = 'stimulus-card state-wrong';
       feedbackBanner.className = 'feedback-banner wrong';
       feedbackBanner.style.display = 'inline-flex';
       feedbackIcon.textContent = 'timer_off';
-      feedbackText.textContent = `Â¡TIEMPO AGOTADO! La opciÃ³n era: ${currentStimulus.actionLabel}`;
+      feedbackText.textContent = '\u00A1TIEMPO AGOTADO! La opci\u00F3n era: ' + currentStimulus.actionLabel;
     } else {
       playSound('wrong');
       stimulusCard.className = 'stimulus-card state-wrong';
       feedbackBanner.className = 'feedback-banner wrong';
       feedbackBanner.style.display = 'inline-flex';
       feedbackIcon.textContent = 'cancel';
-      feedbackText.textContent = `Elegiste ${selectedAction.toUpperCase()} (${reactionTimeSec.toFixed(2)} s). Lo correcto era: ${currentStimulus.actionLabel}`;
+      feedbackText.textContent = 'Elegiste ' + selectedAction.toUpperCase() + ' (' + reactionTimeSec.toFixed(2) + ' s). Lo correcto era: ' + currentStimulus.actionLabel;
     }
 
     if (!isTimeout) {
@@ -1038,28 +1035,28 @@
 
     resAvgTime.textContent = avgSec.toFixed(2) + ' s';
     resBestTime.textContent = bestSec.toFixed(2) + ' s';
-    resAccuracy.textContent = `${correctCount} / ${totalRoundsForLevel}`;
-    resBlindDist.textContent = `${blindMeters} m`;
+    resAccuracy.textContent = correctCount + ' / ' + totalRoundsForLevel;
+    resBlindDist.textContent = blindMeters + ' m';
 
     if (currentLevel === 1) {
-      resTitleMode.textContent = 'Nivel 1: Reflejos CromÃ¡ticos';
+      resTitleMode.textContent = 'Nivel 1: Reflejos Crom\u00E1ticos';
       if (avgSec <= 0.55 && correctCount >= 4) {
-        resAdviceText.innerHTML = `<strong>âš¡ Reflejos asombrosos:</strong> Tu respuesta visual pura fue de <strong>${avgSec.toFixed(2)} s</strong>. TenÃ©s una velocidad psicomotriz superior al promedio juvenil.`;
+        resAdviceText.innerHTML = '<strong>\u26A1 Reflejos asombrosos:</strong> Tu respuesta visual pura fue de <strong>' + avgSec.toFixed(2) + ' s</strong>. Ten\u00E9s una velocidad psicomotriz superior al promedio.';
       } else {
-        resAdviceText.innerHTML = `<strong>âš ï¸ Tiempo registrado: ${avgSec.toFixed(2)} s.</strong> A 40 km/h tu vehÃ­culo avanza <strong>${blindMeters} metros</strong> antes de procesar el color. En el Nivel 2 sumarÃ¡s decisiones en calle.`;
+        resAdviceText.innerHTML = '<strong>\u26A0\uFE0F Tiempo registrado: ' + avgSec.toFixed(2) + ' s.</strong> A 40 km/h tu veh\u00EDculo avanza <strong>' + blindMeters + ' metros</strong> antes de procesar el color. En el Nivel 2 sumar\u00E1s decisiones en calle.';
       }
     } else if (currentLevel === 2) {
       resTitleMode.textContent = 'Nivel 2: Decisiones Viales';
-      resAdviceText.innerHTML = `<strong>ðŸš¦ Criterio y AcciÃ³n:</strong> Acertaste <strong>${correctCount}/${totalRoundsForLevel}</strong> situaciones. Soltar el acelerador ante lomos o escuelas y frenar ante peatones salva vidas todos los dÃ­as.`;
+      resAdviceText.innerHTML = '<strong>\uD83D\uDEA6 Criterio y Acci\u00F3n:</strong> Acertaste <strong>' + correctCount + '/' + totalRoundsForLevel + '</strong> situaciones. Soltar el acelerador ante lomos o escuelas y frenar ante peatones salva vidas todos los d\u00EDas.';
     } else {
-      resTitleMode.textContent = 'Nivel 3: DistracciÃ³n Cognitiva';
+      resTitleMode.textContent = 'Nivel 3: Distracci\u00F3n Cognitiva';
       const distracted = gameHistory.filter(h => h.hadDistraction);
       const focused = gameHistory.filter(h => !h.hadDistraction);
       const avgDistracted = distracted.length ? (distracted.reduce((a, b) => a + b.timeSec, 0) / distracted.length) : avgSec;
       const avgFocused = focused.length ? (focused.reduce((a, b) => a + b.timeSec, 0) / focused.length) : avgSec;
       const diffMeters = +((avgDistracted - avgFocused) * 11.11).toFixed(1);
 
-      resAdviceText.innerHTML = `<strong>ðŸ“± Efecto del Celular:</strong> Con distracciÃ³n promediaste <strong>${avgDistracted.toFixed(2)} s</strong> vs <strong>${avgFocused.toFixed(2)} s</strong> atento. Â¡Esos segundos equivalen a <strong>${Math.max(3, diffMeters)} metros extra</strong> a ciegas sin tocar el freno!`;
+      resAdviceText.innerHTML = '<strong>\uD83D\uDCF1 Efecto del Celular:</strong> Con distracci\u00F3n promediaste <strong>' + avgDistracted.toFixed(2) + ' s</strong> vs <strong>' + avgFocused.toFixed(2) + ' s</strong> atento. \u00A1Esos segundos equivalen a <strong>' + Math.max(3, diffMeters) + ' metros extra</strong> a ciegas sin tocar el freno!';
     }
 
     if (currentLevel < 3) {
@@ -1073,7 +1070,7 @@
     actionsGrid.style.display = 'none';
     resultsCard.style.display = 'flex';
     roundBadge.textContent = 'NIVEL COMPLETADO';
-    roundStateText.textContent = `Aciertos: ${correctCount}/${totalRoundsForLevel}`;
+    roundStateText.textContent = 'Aciertos: ' + correctCount + '/' + totalRoundsForLevel;
 
     saveSessionRecord({
       player: currentPlayer.name,
@@ -1081,7 +1078,7 @@
       level: currentLevel,
       avgTime: avgSec,
       bestTime: bestSec,
-      accuracy: `${correctCount}/${totalRoundsForLevel}`,
+      accuracy: correctCount + '/' + totalRoundsForLevel,
       date: new Date().toLocaleString('es-AR')
     });
   }
@@ -1117,13 +1114,11 @@
     }, 100);
   }
 
-  // Keyboard shortcut: Control + A to access Admin with password
   window.addEventListener('keydown', (e) => {
     if ((e.ctrlKey || e.metaKey) && (e.key === 'a' || e.key === 'A')) {
       const activeEl = document.activeElement;
-      // If typing in input, let normal select-all work only if text is selected, else open admin
       if (activeEl && (activeEl.id === 'input-player-name' || activeEl.id === 'input-player-email')) {
-        // Allow select-all in inputs
+        // Normal select-all inside text input
       } else {
         e.preventDefault();
         openAdminModal();
@@ -1131,12 +1126,11 @@
     }
   });
 
-  // Touch shortcut for phone/tablet: 4 quick taps on BA VIAL logo
-  const gcbaBadge = document.getElementById('header-brand-block');
+  const brandBlock = document.getElementById('header-brand-block');
   let badgeTapCount = 0;
   let badgeTapTimeout = null;
-  if (gcbaBadge) {
-    gcbaBadge.addEventListener('click', () => {
+  if (brandBlock) {
+    brandBlock.addEventListener('click', () => {
       badgeTapCount++;
       clearTimeout(badgeTapTimeout);
       if (badgeTapCount >= 4) {
@@ -1148,7 +1142,6 @@
     });
   }
 
-  // Submit on Enter key inside password input
   if (inputAdminPass) {
     inputAdminPass.addEventListener('keydown', (e) => {
       if (e.key === 'Enter') {
@@ -1196,9 +1189,9 @@
         const bests = list.map(item => Number(item.bestTime) || 99).filter(n => n > 0 && n < 90);
         const avgs = list.map(item => Number(item.avgTime) || 0).filter(n => n > 0);
 
-        adminStatBest.textContent = bests.length ? `${Math.min(...bests).toFixed(2)}s` : '0.00s';
+        adminStatBest.textContent = bests.length ? (Math.min(...bests).toFixed(2) + 's') : '0.00s';
         const totalAvg = avgs.length ? (avgs.reduce((a, b) => a + b, 0) / avgs.length).toFixed(2) : '0.00';
-        adminStatAvg.textContent = `${totalAvg}s`;
+        adminStatAvg.textContent = totalAvg + 's';
 
         adminTableBody.innerHTML = list.slice(0, 50).map(item => `
           <tr>
@@ -1212,7 +1205,7 @@
       } else {
         adminStatBest.textContent = '0.00s';
         adminStatAvg.textContent = '0.00s';
-        adminTableBody.innerHTML = `<tr><td colspan="5" style="text-align:center;color:var(--text-muted);padding:14px;">No hay registros aÃºn.</td></tr>`;
+        adminTableBody.innerHTML = '<tr><td colspan="5" style="text-align:center;color:var(--text-muted);padding:14px;">No hay registros a\u00FAn.</td></tr>';
       }
     } catch (e) {
       console.warn('Error rendering admin stats', e);
@@ -1270,7 +1263,7 @@
   });
 
   btnAdminClear.addEventListener('click', () => {
-    if (confirm('Â¿EstÃ¡s seguro de que deseÃ¡s borrar todo el historial del stand? Esta acciÃ³n no se puede deshacer.')) {
+    if (confirm('\u00BFEst\u00E1s seguro de que dese\u00E1s borrar todo el historial del stand? Esta acci\u00F3n no se puede deshacer.')) {
       localStorage.removeItem(STORAGE_SESSIONS);
       renderAdminDashboard();
     }

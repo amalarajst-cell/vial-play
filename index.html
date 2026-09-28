@@ -6,8 +6,8 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="theme-color" content="#0b0e0f">
-  <title>VialPlay - Test de Tiempo de Reacción | GCBA</title>
-  <meta name="description" content="Test de tiempo de reacción para celulares. Evalúa tus reflejos viales, decisiones y efecto de distracciones con el celular. Seguridad Vial BA.">
+  <title>VialPlay - Test de Tiempo de Reacci&oacute;n | GCBA</title>
+  <meta name="description" content="Test de tiempo de reacci&oacute;n para celulares. Eval&uacute;a tus reflejos viales, decisiones y efecto de distracciones con el celular. Seguridad Vial BA.">
 
   <!-- Google Fonts & Material Symbols -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -37,7 +37,7 @@
         <!-- Header Actions -->
         <div class="header-actions">
           <!-- Player Chip (Visible once logged in) -->
-          <div class="player-status-chip" id="header-player-chip" title="Cambiar Participante / Cerrar Sesión">
+          <div class="player-status-chip" id="header-player-chip" title="Cambiar Participante / Cerrar Sesi&oacute;n">
             <span class="material-symbols-outlined" style="font-size:18px;color:var(--accent-cyan);">person</span>
             <span class="player-chip-name" id="header-player-name">Participante</span>
             <span class="material-symbols-outlined" style="font-size:14px;color:var(--accent-cyan);">swap_horiz</span>
@@ -47,8 +47,6 @@
           <button type="button" class="header-icon-btn active-sound" id="btn-toggle-sound" title="Alternar Sonido" aria-label="Alternar Sonido">
             <span class="material-symbols-outlined" id="sound-icon-symbol" style="font-size:20px;">volume_up</span>
           </button>
-
-
         </div>
       </div>
     </header>
@@ -57,16 +55,16 @@
     <main class="screens-viewport">
 
       <!-- ===============================================================
-           SECCIÓN 1: LOGIN Y ACCESO DE PARTICIPANTE
+           SECCION 1: LOGIN Y ACCESO DE PARTICIPANTE
            =============================================================== -->
       <section id="screen-login" class="screen-section active">
         <div class="login-screen-wrap">
 
           <!-- Hero Presentation Card -->
           <div class="login-hero-card">
-            <h1 class="login-title">Test de Reacción Vial</h1>
+            <h1 class="login-title">Test de Reacci&oacute;n Vial</h1>
             <p class="login-subtitle">
-              Ingresá tus datos para acceder al test interactivo de reflejos, toma de decisiones viales y distracción al volante.
+              Ingres&aacute; tus datos para acceder al test interactivo de reflejos, toma de decisiones viales y distracci&oacute;n al volante.
             </p>
           </div>
 
@@ -87,7 +85,7 @@
             <!-- Email or Phone -->
             <div class="input-block">
               <div class="input-label-row">
-                <label for="input-player-email">Email o Teléfono de Contacto</label>
+                <label for="input-player-email">Email o Tel&eacute;fono de Contacto</label>
                 <span class="input-hint">Opcional</span>
               </div>
               <div class="input-box-wrap">
@@ -98,7 +96,7 @@
 
             <!-- Submit CTA -->
             <button type="submit" id="btn-submit-login" class="btn-login-submit" style="margin-top:6px;">
-              <span>INGRESAR AL TEST DE REACCIÓN</span>
+              <span>INGRESAR AL TEST DE REACCI&Oacute;N</span>
               <span class="material-symbols-outlined">arrow_forward</span>
             </button>
           </form>
@@ -106,18 +104,18 @@
           <!-- 3 Pedagogical Features Highlight -->
           <div class="login-feature-boxes">
             <div class="feature-box">
-              <div class="feat-icon">⚡</div>
+              <div class="feat-icon">&#9889;</div>
               <div class="feat-title">1. Colores</div>
               <div class="feat-desc">Reflejos visuales puros y tiempo psicomotriz.</div>
             </div>
             <div class="feature-box">
-              <div class="feat-icon">🚦</div>
+              <div class="feat-icon">&#128654;</div>
               <div class="feat-title">2. Decisiones</div>
               <div class="feat-desc">Frenar, desacelerar o esquivar en la calle.</div>
             </div>
             <div class="feature-box">
-              <div class="feat-icon">📱</div>
-              <div class="feat-title">3. Distracción</div>
+              <div class="feat-icon">&#128241;</div>
+              <div class="feat-title">3. Distracci&oacute;n</div>
               <div class="feat-desc">Peligros imprevistos simulando WhatsApp.</div>
             </div>
           </div>
@@ -126,8 +124,8 @@
       </section>
 
       <!-- ===============================================================
-           SECCIÓN 2: TEST DE TIEMPO DE REACCIÓN (SISTEMA DE RULETA VIAL)
-           (ACCESO RECIÉN DESPUÉS DE LOGUEARSE)
+           SECCION 2: TEST DE TIEMPO DE REACCION (SISTEMA DE RULETA VIAL)
+           (ACCESO RECIEN DESPUES DE LOGUEARSE)
            =============================================================== -->
       <section id="screen-test" class="screen-section">
         <div class="test-screen-wrap">
@@ -144,15 +142,15 @@
             </button>
             <button type="button" class="level-tab-btn" id="tab-lvl-3" data-level="3">
               <span class="material-symbols-outlined" style="font-size:16px;">smartphone</span>
-              <span>3. Distracción</span>
+              <span>3. Distracci&oacute;n</span>
             </button>
           </div>
 
           <!-- Status Bar & Progress Dots -->
           <div class="status-bar">
             <div class="round-info">
-              <span class="round-badge" id="round-badge">ESTÍMULO 1 / 5</span>
-              <span id="round-state-text" style="color:var(--text-muted)">Tocá para iniciar</span>
+              <span class="round-badge" id="round-badge">EST&Iacute;MULO 1 / 5</span>
+              <span id="round-state-text" style="color:var(--text-muted)">Toc&aacute; para iniciar</span>
             </div>
             <div class="dots-wrap" id="dots-wrap">
               <!-- Indicators generated dynamically -->
@@ -172,15 +170,15 @@
                 <span class="material-symbols-outlined">chat</span>
               </div>
               <div class="wa-content">
-                <div class="wa-sender" id="wa-sender">WhatsApp • Mamá</div>
-                <div class="wa-text" id="wa-text">"¿A qué hora llegás? ¡Avisame cuando salgas!"</div>
+                <div class="wa-sender" id="wa-sender">WhatsApp &bull; Mam&aacute;</div>
+                <div class="wa-text" id="wa-text">&quot;&iquest;A qu&eacute; hora lleg&aacute;s? &iexcl;Avisame cuando salgas!&quot;</div>
               </div>
             </div>
 
             <!-- Category Badge -->
             <div class="stimulus-category-badge" id="stimulus-cat-badge">
               <span class="material-symbols-outlined" style="font-size:15px;">touch_app</span>
-              <span id="cat-badge-text">NIVEL 1: REFLEJOS CROMÁTICOS</span>
+              <span id="cat-badge-text">NIVEL 1 &bull; REFLEJOS CROM&Aacute;TICOS</span>
             </div>
 
             <!-- Visual Element Wrap (Orb, Sign, Traffic light) -->
@@ -189,9 +187,9 @@
             </div>
 
             <!-- Title & Pedagogical Description -->
-            <h2 class="stimulus-title" id="stimulus-title">TOCÁ PARA INICIAR</h2>
+            <h2 class="stimulus-title" id="stimulus-title">TOC&Aacute; PARA INICIAR</h2>
             <p class="stimulus-desc" id="stimulus-desc">
-              Aparecerá un color sorpresa. Presioná el botón correspondiente lo más rápido posible.
+              Aparecer&aacute; un color sorpresa. Presion&aacute; el bot&oacute;n correspondiente lo m&aacute;s r&aacute;pido posible.
             </p>
 
             <!-- Begin Button -->
@@ -208,7 +206,7 @@
             <!-- Immediate Feedback Message Banner -->
             <div class="feedback-banner" id="feedback-banner">
               <span class="material-symbols-outlined" style="font-size:18px;" id="feedback-icon">check_circle</span>
-              <span id="feedback-text">¡Correcto!</span>
+              <span id="feedback-text">&iexcl;Correcto!</span>
             </div>
           </div>
 
@@ -225,13 +223,13 @@
 
             <div>
               <div class="results-hero-val" id="res-avg-time">0.55 s</div>
-              <div class="results-hero-label" id="res-title-mode">Tiempo Promedio de Reacción</div>
+              <div class="results-hero-label" id="res-title-mode">Tiempo Promedio de Reacci&oacute;n</div>
             </div>
 
             <div class="results-stats-grid">
               <div class="stat-mini-box">
                 <div class="stat-mini-val" id="res-best-time" style="color:var(--accent-cyan);">0.42 s</div>
-                <div class="stat-mini-lbl">Mejor Reacción</div>
+                <div class="stat-mini-lbl">Mejor Reacci&oacute;n</div>
               </div>
               <div class="stat-mini-box">
                 <div class="stat-mini-val" id="res-accuracy" style="color:var(--accent-green);">5 / 5</div>
@@ -246,7 +244,7 @@
             <div class="results-advice-box">
               <span class="material-symbols-outlined" style="color:var(--accent-yellow);font-size:20px;flex-shrink:0;">lightbulb</span>
               <div id="res-advice-text">
-                ¡Gran capacidad de respuesta! Mantener esta concentración en el tránsito urbano previene frenadas imprevistas y siniestros graves.
+                &iexcl;Gran capacidad de respuesta! Mantener esta concentraci&oacute;n en el tr&aacute;nsito urbano previene frenadas imprevistas y siniestros graves.
               </div>
             </div>
 
@@ -271,7 +269,7 @@
             <div class="distance-matrix-header">
               <div class="distance-matrix-title">
                 <span class="material-symbols-outlined" style="font-size:16px;color:var(--accent-cyan);">straighten</span>
-                <span>Metros a ciegas durante tu reacción</span>
+                <span>Metros a ciegas durante tu reacci&oacute;n</span>
               </div>
               <span class="distance-time-tag" id="distance-time-tag">Ref. 0.75 s</span>
             </div>
@@ -319,7 +317,7 @@
 
       <!-- Password auth view -->
       <div id="admin-auth-view" style="display:flex;flex-direction:column;gap:10px;">
-        <p style="font-size:12px;color:var(--text-muted);">Ingresá la clave de operador para ver métricas y exportar:</p>
+        <p style="font-size:12px;color:var(--text-muted);">Ingres&aacute; la clave de operador para ver m&eacute;tricas y exportar:</p>
         <div class="input-box-wrap">
           <span class="material-symbols-outlined">lock</span>
           <input type="password" id="input-admin-pass" class="text-input" placeholder="Clave de acceso">
@@ -337,7 +335,7 @@
           </div>
           <div class="metric-pill">
             <div class="metric-num" id="admin-stat-best">0.00s</div>
-            <div class="metric-tag">Récord</div>
+            <div class="metric-tag">R&eacute;cord</div>
           </div>
           <div class="metric-pill">
             <div class="metric-num" id="admin-stat-avg">0.00s</div>
@@ -358,7 +356,7 @@
             </thead>
             <tbody id="admin-table-body">
               <tr>
-                <td colspan="5" style="text-align:center;color:var(--text-muted);padding:14px;">No hay registros aún.</td>
+                <td colspan="5" style="text-align:center;color:var(--text-muted);padding:14px;">No hay registros a&uacute;n.</td>
               </tr>
             </tbody>
           </table>
