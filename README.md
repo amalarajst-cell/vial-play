@@ -1,4 +1,4 @@
-# VIAL PLAY - Test de Reacción Vial 🚦🚗
+﻿# VIAL PLAY - Test de Tiempo de Reacción (Mobile First) 📱⚡
 ### Stand de Seguridad Vial | Gobierno de la Ciudad de Buenos Aires
 
 **Dirección General de Seguridad Vial**  
@@ -6,42 +6,65 @@
 
 ---
 
-## 📌 Descripción del Proyecto
-**VIAL PLAY** es una aplicación web interactiva desarrollada para stands y eventos de concientización y educación vial en la Ciudad de Buenos Aires. 
+## 📋 Descripción del Proyecto
+Aplicación web mobile-first optimizada para **celulares y dispositivos móviles**, diseñada para evaluar y concientizar sobre el tiempo psicomotriz de reacción, la toma de decisiones al volante y el peligro crítico del uso del celular mientras se conduce.
 
-Permite evaluar de forma precisa los tiempos de respuesta ante situaciones de frenado imprevisto y concientizar a conductores, motociclistas, ciclistas y peatones sobre cómo cada milisegundo se traduce en metros de distancia de detención recorrida a ciegas.
-
----
-
-## 🚀 Funcionalidades Principales
-1. **Registro Rápido de Participantes:** Formulario ágil con Nombre, Apellido, Correo Electrónico y Rol de Movilidad urbana.
-2. **Módulo Educativo de Concientización (Briefing):** Explicación clara sobre el tiempo de reacción humano y la distancia física de frenado antes de presionar el pedal.
-3. **Simulador de Semáforo y Frenado de Emergencia:**
-   - 3 intentos por usuario para determinar un promedio certero.
-   - Detección precisa en milisegundos con `performance.now()`.
-   - Sistema de prevención de anticipación ("¡Muy pronto!"), anulando falsas salidas.
-   - Efectos sonoros sintetizados nativos con Web Audio API (sin dependencias ni enlaces externos).
-4. **Informe de Resultados e Infografía Comparativa:**
-   - Clasificación por categorías de reflejos.
-   - Cálculo automático de distancia recorrida a 40 km/h y 60 km/h.
-   - Equivalencia visual en cantidad de autos estacionados.
-5. **Panel de Administración con Contraseña:**
-   - Contraseña de acceso por defecto: `vial2026` (modificable desde el panel).
-   - Métricas en vivo del stand (total evaluados, récord y promedio general).
-   - Tabla interactiva con búsqueda en tiempo real.
-   - Exportación de datos de participantes a **CSV / Excel** con formato UTF-8 BOM.
-   - Modo pantalla completa para tablets y pantallas táctiles de stand.
+Utiliza el **mismo motor y sistema de niveles que el Test de Reacción de Ruleta Vial**.
 
 ---
 
-## 💻 Tecnologías Utilizadas
-- **HTML5** semántico y accesible.
-- **CSS3 Vanilla** moderno con diseño responsive, paleta oficial GCBA y animaciones fluidas.
-- **JavaScript (ES6+)** nativo, autónomo y sin dependencias externas.
-- **Web Audio API** para síntesis de audio procedural.
-- **LocalStorage API** para almacenamiento seguro offline en stands sin conexión a internet.
+## 🚀 Flujo de la Aplicación
+
+### 1. Sección de Logueo / Registro de Participante (Obligatorio)
+- **Acceso requerido:** No es posible ingresar al test sin completar primero el registro de piloto.
+- Datos solicitados:
+  - **Nombre y Apellido / Apodo** (Requerido)
+  - **Email de contacto** (Opcional)
+  - **Rol de movilidad urbana:** Auto 🚗, Moto 🏍️, Bici 🚲, Peatón 🚶
+  - **Avatar de Piloto:** Selector interactivo con iconos oficiales.
+- Botón **"INGRESAR AL TEST DE REACCIÓN ➔"**.
+- En el header y barra superior se muestra el perfil activo, con opción de **"Cambiar Piloto / Salir"** para volver a la pantalla de logueo.
 
 ---
 
-## 🛠️ Ejecución Local
-Simplemente abrir el archivo `index.html` en cualquier navegador web moderno (Google Chrome, Microsoft Edge, Mozilla Firefox o Safari). No requiere instalación de servidores ni dependencias.
+### 2. Sección del Test de Reacción (Sistema Ruleta Vial)
+Cuenta con **3 niveles interactivos**:
+
+1. **Nivel 1: Reflejos Cromáticos (Colores)**
+   - 4 botones: **Rojo** (Detención), **Amarillo** (Precaución), **Verde** (Avanzar), **Azul** (Información).
+   - Estímulo sorpresa con retardo aleatorio (1.3s a 3.1s).
+   - Medición precisa en milisegundos con `performance.now()`.
+   - Sistema anti-anticipación: detecta falsas salidas si se pulsa antes de tiempo.
+
+2. **Nivel 2: Toma de Decisiones Viales**
+   - 4 acciones viales: **Frenar**, **Soltar el Acelerador**, **Esquivar** u **Omitir**.
+   - Situaciones reales: Señal de PARE, semáforos, peatones en senda, lomos de burro, zonas escolares, calzada resbaladiza, conos de obra, baches profundos, ciclistas.
+
+3. **Nivel 3: Distracción Cognitiva al Volante**
+   - Simulación de peligros imprevistos en calzada combinados con **notificaciones emergentes y sonidos reales de WhatsApp / celular**.
+   - Mezcla aleatoria de los botones al momento del estímulo para emular la pérdida de foco y confusión mental que provoca mirar el teléfono al conducir.
+
+---
+
+### 3. Matriz de Distancia a Ciegas e Informe Pedagógico
+- Cálculo en tiempo real de los **metros recorridos sin frenar** según el tiempo de reacción:
+  - **40 km/h** (Calles y zonas escolares) = $11.11 \times t$ metros.
+  - **60 km/h** (Avenidas urbanas) = $16.67 \times t$ metros.
+  - **100 km/h** (Autopistas) = $27.78 \times t$ metros.
+- Tarjeta de resultados con promedio, mejor tiempo, aciertos y devolución personalizada.
+
+---
+
+### 4. Panel de Administración y Stand
+- Clave de operador: `vial2026`
+- Contador de participantes, récord del stand y promedio general.
+- Historial completo en vivo.
+- Exportación a planilla **Excel / CSV** con codificación UTF-8 BOM.
+
+---
+
+## 📲 Cómo Abrir en el Celular
+1. Hacé doble clic en `iniciar_servidor_celular.bat`.
+2. En la ventana negra verás la dirección IP local (ejemplo: `http://10.67.145.121:8080/`).
+3. Conectá tu celular a la misma red Wi-Fi y abrí esa dirección en Chrome o Safari.
+4. También podés abrir directamente `index.html` en el navegador de tu computadora.
