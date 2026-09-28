@@ -1217,11 +1217,20 @@
       if (adminStatTotal) adminStatTotal.textContent = list.length;
 
       if (list.length > 0) {
-        const bests = list.map(item => Number(item.bestTime) || 99).filter(n => n > 0 && n < 90);
-        const avgs = list.map(item => Number(item.avgTime) || 0).filter(n => n > 0);
+        const bests = list.map(item => {
+          let b = Number(item.bestTime) || 99;
+          if (b > 100) b = b / 1000;
+          return b;
+        }).filter(n => n > 0 && n < 30);
+
+        const avgs = list.map(item => {
+          let a = Number(item.avgTime) || 0;
+          if (a > 100) a = a / 1000;
+          return a;
+        }).filter(n => n > 0 && n < 30);
 
         if (adminStatBest) {
-          adminStatBest.textContent = bests.length ? (Math.min(...bests).toFixed(2) + 's') : '0.00s';
+          adminStatBest.textContent = bests.length ? (Math.min(...bests).toFixed(2) + 's') : '--';
         }
         if (adminStatAvg) {
           const totalAvg = avgs.length ? (avgs.reduce((a, b) => a + b, 0) / avgs.length).toFixed(2) : '0.00';
@@ -1244,7 +1253,7 @@
           adminStatAcc.textContent = accPct + '%';
         }
       } else {
-        if (adminStatBest) adminStatBest.textContent = '0.00s';
+        if (adminStatBest) adminStatBest.textContent = '--';
         if (adminStatAvg) adminStatAvg.textContent = '0.00s';
         if (adminStatAcc) adminStatAcc.textContent = '100%';
       }
@@ -1271,7 +1280,14 @@
 
       if (filtered.length > 0) {
         adminTableBody.innerHTML = filtered.map((item, idx) => {
-          const avgNum = Number(item.avgTime) || 0;
+          let avgNum = Number(item.avgTime) || 0;
+          if (avgNum > 100) avgNum = avgNum / 1000;
+          const avgDisplay = avgNum > 0 ? avgNum.toFixed(2) + 's' : '-';
+
+          let bestNum = Number(item.bestTime) || 0;
+          if (bestNum > 100) bestNum = bestNum / 1000;
+          const bestDisplay = bestNum > 0 ? bestNum.toFixed(2) + 's' : '-';
+
           let speedClass = 'badge-speed-mid';
           if (avgNum > 0 && avgNum < 0.50) speedClass = 'badge-speed-fast';
           else if (avgNum >= 0.70) speedClass = 'badge-speed-slow';
@@ -1301,8 +1317,8 @@
               </td>
               <td style="color:var(--text-muted);">${escapeHtml(item.email || '-')}</td>
               <td><span class="badge-lvl ${lvlClass}">${lvlName}</span></td>
-              <td><span class="badge-speed ${speedClass}">${item.avgTime}s</span></td>
-              <td style="font-family:var(--font-condensed);font-weight:700;color:var(--accent-cyan);font-size:13px;">${item.bestTime}s</td>
+              <td><span class="badge-speed ${speedClass}">${avgDisplay}</span></td>
+              <td style="font-family:var(--font-condensed);font-weight:700;color:var(--accent-cyan);font-size:13px;">${bestDisplay}</td>
               <td><span style="font-weight:700;color:var(--accent-green);font-size:12px;">${item.accuracy}</span></td>
             </tr>
           `;
