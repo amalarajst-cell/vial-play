@@ -14,8 +14,6 @@
   // ==========================================================================
   const STORAGE_NAME = 'vialplay_player_name';
   const STORAGE_EMAIL = 'vialplay_player_email';
-  const STORAGE_ROLE = 'vialplay_player_role';
-  const STORAGE_AVATAR = 'vialplay_player_avatar';
   const STORAGE_SESSIONS = 'vialplay_participants_db';
   const STORAGE_ADMIN_PWD = 'vialplay_admin_pwd';
   const DEFAULT_ADMIN_PWD = 'vial2026';
@@ -23,8 +21,6 @@
   let currentPlayer = {
     name: '',
     email: '',
-    role: 'Auto',
-    avatar: 'assets/brand/icon_auto.png',
     isLoggedIn: false
   };
 
@@ -94,6 +90,7 @@
         [587.33, 880].forEach((f, idx) => {
           const osc = ctx.createOscillator();
           const gain = ctx.createGain();
+          osc.type = 'sine';
           osc.connect(gain);
           gain.connect(ctx.destination);
           osc.frequency.setValueAtTime(f, now + idx * 0.06);
@@ -421,15 +418,10 @@
   const formLogin = document.getElementById('form-login');
   const inputPlayerName = document.getElementById('input-player-name');
   const inputPlayerEmail = document.getElementById('input-player-email');
-  const roleButtons = document.querySelectorAll('.role-pill-btn');
-  const avatarButtons = document.querySelectorAll('.avatar-choice-btn');
 
   const headerPlayerChip = document.getElementById('header-player-chip');
-  const headerPlayerAvatar = document.getElementById('header-player-avatar');
   const headerPlayerName = document.getElementById('header-player-name');
-  const testPlayerAvatar = document.getElementById('test-player-avatar');
   const testPlayerName = document.getElementById('test-player-name');
-  const testPlayerRole = document.getElementById('test-player-role');
   const btnLogout = document.getElementById('btn-logout');
   const btnBackLogin = document.getElementById('btn-back-login');
 
@@ -499,15 +491,11 @@
   function loadStoredPlayer() {
     const name = localStorage.getItem(STORAGE_NAME);
     const email = localStorage.getItem(STORAGE_EMAIL) || '';
-    const role = localStorage.getItem(STORAGE_ROLE) || 'Auto';
-    const avatar = localStorage.getItem(STORAGE_AVATAR) || 'assets/brand/icon_auto.png';
 
     if (name && name.trim()) {
       currentPlayer = {
         name: name.trim(),
         email: email.trim(),
-        role: role,
-        avatar: avatar,
         isLoggedIn: true
       };
       inputPlayerName.value = currentPlayer.name;
@@ -519,10 +507,7 @@
     if (currentPlayer.isLoggedIn) {
       headerPlayerChip.style.display = 'inline-flex';
       headerPlayerName.textContent = currentPlayer.name;
-      headerPlayerAvatar.src = currentPlayer.avatar;
       testPlayerName.textContent = currentPlayer.name;
-      testPlayerRole.textContent = `Conductor ${currentPlayer.role}`;
-      testPlayerAvatar.src = currentPlayer.avatar;
     } else {
       headerPlayerChip.style.display = 'none';
     }
@@ -556,43 +541,19 @@
     }
 
     const email = inputPlayerEmail.value.trim();
-    const activeRoleBtn = document.querySelector('.role-pill-btn.active');
-    const role = activeRoleBtn ? activeRoleBtn.getAttribute('data-role') : 'Auto';
-    const activeAvatarBtn = document.querySelector('.avatar-choice-btn.active');
-    const avatar = activeAvatarBtn ? activeAvatarBtn.getAttribute('data-avatar') : 'assets/brand/icon_auto.png';
 
     currentPlayer = {
       name: name,
       email: email,
-      role: role,
-      avatar: avatar,
       isLoggedIn: true
     };
 
     localStorage.setItem(STORAGE_NAME, currentPlayer.name);
     localStorage.setItem(STORAGE_EMAIL, currentPlayer.email);
-    localStorage.setItem(STORAGE_ROLE, currentPlayer.role);
-    localStorage.setItem(STORAGE_AVATAR, currentPlayer.avatar);
 
-    getAudioContext(); // Initialize audio context on user gesture
+    getAudioContext();
     playSound('correct');
     showSection('test');
-  });
-
-  // Role pill selector
-  roleButtons.forEach(btn => {
-    btn.addEventListener('click', () => {
-      roleButtons.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-    });
-  });
-
-  // Avatar choice selector
-  avatarButtons.forEach(btn => {
-    btn.addEventListener('click', () => {
-      avatarButtons.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-    });
   });
 
   // Logout / Switch Player
@@ -701,7 +662,6 @@
       `;
     }
 
-    // Attach click events
     actionsGrid.querySelectorAll('.btn-action').forEach(b => {
       b.addEventListener('click', () => {
         const act = b.getAttribute('data-action');
@@ -870,7 +830,6 @@
   });
 
   stimulusCard.addEventListener('click', (e) => {
-    // If clicked on idle stimulus card, start the round
     if (state === 'idle' && !e.target.closest('#btn-start-game-cta')) {
       startRoundWaiting();
     }
@@ -895,7 +854,6 @@
     setButtonsEnabled(true);
     playSound('tick');
 
-    // Random non-predictable delay (1.3s to 3.1s)
     const waitMs = 1300 + Math.random() * 1800;
     clearTimeout(waitTimer);
     waitTimer = setTimeout(() => {
@@ -910,7 +868,6 @@
     currentStimulus = activeStimuliQueue[currentRoundIdx];
     stimulusStartTime = performance.now();
 
-    // In Level 3: shuffle action buttons on stimulus
     if (currentLevel === 3) {
       shuffleActionButtons();
     }
@@ -922,7 +879,6 @@
     stimulusTitle.textContent = currentStimulus.title;
     stimulusDesc.textContent = currentStimulus.desc;
 
-    // Distraction popup in Level 3
     if (currentLevel === 3 && currentStimulus.hasDistraction) {
       waSender.textContent = currentStimulus.waSender;
       waText.textContent = `"${currentStimulus.waMessage}"`;
@@ -940,7 +896,6 @@
     roundStateText.textContent = 'Â¡REACCIONÃ AHORA!';
     runLiveTimer();
 
-    // Timeout watchdog
     clearTimeout(timeoutWatchdog);
     timeoutWatchdog = setTimeout(() => {
       if (state === 'active') {
@@ -970,7 +925,6 @@
     if (state === 'feedback' || state === 'finished') return;
 
     if (state === 'waiting') {
-      // False start / Anticipation
       clearTimeout(waitTimer);
       cancelAnimationFrame(liveTimerRaf);
       playSound('wrong');
@@ -1131,11 +1085,9 @@
     roundBadge.textContent = 'NIVEL COMPLETADO';
     roundStateText.textContent = `Aciertos: ${correctCount}/${totalRoundsForLevel}`;
 
-    // Persist session to local storage
     saveSessionRecord({
       player: currentPlayer.name,
       email: currentPlayer.email,
-      role: currentPlayer.role,
       level: currentLevel,
       avgTime: avgSec,
       bestTime: bestSec,
@@ -1212,7 +1164,7 @@
         adminTableBody.innerHTML = list.slice(0, 50).map(item => `
           <tr>
             <td style="font-weight:700;">${escapeHtml(item.player)}</td>
-            <td style="color:var(--text-muted);">${escapeHtml(item.role || 'Auto')}</td>
+            <td style="color:var(--text-muted);">${escapeHtml(item.email || '-')}</td>
             <td>Nivel ${item.level}</td>
             <td style="color:var(--accent-cyan);font-weight:700;">${item.avgTime}s</td>
             <td style="color:var(--accent-green);">${item.accuracy}</td>
@@ -1248,15 +1200,14 @@
         return;
       }
 
-      let csv = '\uFEFF'; // UTF-8 BOM
-      csv += 'Fecha,Piloto,Email,Rol,Nivel,Tiempo Promedio (s),Mejor Tiempo (s),Aciertos\n';
+      let csv = '\uFEFF';
+      csv += 'Fecha,Participante,Email,Nivel,Tiempo Promedio (s),Mejor Tiempo (s),Aciertos\n';
 
       list.forEach(r => {
         const row = [
           `"${(r.date || '').replace(/"/g, '""')}"`,
           `"${(r.player || '').replace(/"/g, '""')}"`,
           `"${(r.email || '').replace(/"/g, '""')}"`,
-          `"${(r.role || '').replace(/"/g, '""')}"`,
           r.level,
           r.avgTime,
           r.bestTime,

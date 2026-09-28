@@ -40,9 +40,9 @@
         <!-- Header Actions -->
         <div class="header-actions">
           <!-- Player Chip (Visible once logged in) -->
-          <div class="player-status-chip" id="header-player-chip" title="Cambiar Piloto / Cerrar Sesión">
-            <img src="assets/brand/icon_auto.png" alt="Avatar" class="player-chip-avatar" id="header-player-avatar" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 24 24\' fill=\'%238DE2D6\'><path d=\'M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z\'/></svg>'">
-            <span class="player-chip-name" id="header-player-name">Piloto</span>
+          <div class="player-status-chip" id="header-player-chip" title="Cambiar Participante / Cerrar Sesión">
+            <span class="material-symbols-outlined" style="font-size:18px;color:var(--accent-cyan);">person</span>
+            <span class="player-chip-name" id="header-player-name">Participante</span>
             <span class="material-symbols-outlined" style="font-size:14px;color:var(--accent-cyan);">swap_horiz</span>
           </div>
 
@@ -72,7 +72,7 @@
           <div class="login-hero-card">
             <div class="step-indicator">
               <span class="material-symbols-outlined" style="font-size:14px;">verified_user</span>
-              <span>Paso 1 de 2 • Acceso de Piloto</span>
+              <span>Paso 1 de 2 • Acceso de Participante</span>
             </div>
             <h1 class="login-title">Test de Reacción Vial</h1>
             <p class="login-subtitle">
@@ -97,7 +97,7 @@
             <!-- Email or Phone -->
             <div class="input-block">
               <div class="input-label-row">
-                <label for="input-player-email">Email de Contacto</label>
+                <label for="input-player-email">Email o Teléfono de Contacto</label>
                 <span class="input-hint">Opcional</span>
               </div>
               <div class="input-box-wrap">
@@ -106,58 +106,8 @@
               </div>
             </div>
 
-            <!-- Mobility Role Selector -->
-            <div class="input-block">
-              <div class="input-label-row">
-                <span>¿Cómo te movés habitualmente?</span>
-                <span class="input-hint">Seleccioná uno</span>
-              </div>
-              <div class="role-pills-grid" id="role-selector-grid">
-                <button type="button" class="role-pill-btn active" data-role="Auto">
-                  <span class="role-icon">🚗</span>
-                  <span>Conductor Auto</span>
-                </button>
-                <button type="button" class="role-pill-btn" data-role="Moto">
-                  <span class="role-icon">🏍️</span>
-                  <span>Motociclista</span>
-                </button>
-                <button type="button" class="role-pill-btn" data-role="Bici">
-                  <span class="role-icon">🚲</span>
-                  <span>Ciclista / Bici</span>
-                </button>
-                <button type="button" class="role-pill-btn" data-role="Peatón">
-                  <span class="role-icon">🚶</span>
-                  <span>Peatón</span>
-                </button>
-              </div>
-            </div>
-
-            <!-- Avatar Selection -->
-            <div class="input-block">
-              <div class="input-label-row">
-                <span>Elegí tu Avatar de Piloto</span>
-              </div>
-              <div class="avatar-selection-row" id="avatar-choices-wrap">
-                <div class="avatar-choice-btn active" data-avatar="assets/brand/icon_auto.png">
-                  <img src="assets/brand/icon_auto.png" alt="Auto" style="filter:brightness(0) invert(1);">
-                </div>
-                <div class="avatar-choice-btn" data-avatar="assets/brand/icon_moto.png">
-                  <img src="assets/brand/icon_moto.png" alt="Moto" style="filter:brightness(0) invert(1);">
-                </div>
-                <div class="avatar-choice-btn" data-avatar="assets/brand/icon_bici.png">
-                  <img src="assets/brand/icon_bici.png" alt="Bici" style="filter:brightness(0) invert(1);">
-                </div>
-                <div class="avatar-choice-btn" data-avatar="assets/brand/icon_colectivo.png">
-                  <img src="assets/brand/icon_colectivo.png" alt="Bus" style="filter:brightness(0) invert(1);">
-                </div>
-                <div class="avatar-choice-btn" data-avatar="assets/brand/icon_peaton.png">
-                  <img src="assets/brand/icon_peaton.png" alt="Peatón" style="filter:brightness(0) invert(1);">
-                </div>
-              </div>
-            </div>
-
             <!-- Submit CTA -->
-            <button type="submit" id="btn-submit-login" class="btn-login-submit">
+            <button type="submit" id="btn-submit-login" class="btn-login-submit" style="margin-top:6px;">
               <span>INGRESAR AL TEST DE REACCIÓN</span>
               <span class="material-symbols-outlined">arrow_forward</span>
             </button>
@@ -195,13 +145,15 @@
           <!-- Active Participant Strip -->
           <div class="active-player-strip">
             <div class="player-info-left">
-              <img src="assets/brand/icon_auto.png" alt="Avatar" class="player-avatar-small" id="test-player-avatar">
+              <div style="width:34px;height:34px;border-radius:50%;background:#1b2225;border:1.5px solid var(--accent-cyan);display:flex;align-items:center;justify-content:center;color:var(--accent-cyan);">
+                <span class="material-symbols-outlined" style="font-size:20px;">person</span>
+              </div>
               <div class="player-meta-block">
                 <span class="player-meta-name" id="test-player-name">Alex Rivera</span>
-                <span class="player-meta-role" id="test-player-role">Conductor Auto</span>
+                <span class="player-meta-role" id="test-player-role">Participante</span>
               </div>
             </div>
-            <button type="button" class="btn-change-player" id="btn-logout" title="Cambiar Piloto o Cerrar Sesión">
+            <button type="button" class="btn-change-player" id="btn-logout" title="Cambiar Participante o Cerrar Sesión">
               <span class="material-symbols-outlined" style="font-size:16px;">logout</span>
               <span>Salir</span>
             </button>
@@ -336,7 +288,7 @@
               </button>
               <button type="button" class="btn-back-hub" id="btn-back-login">
                 <span class="material-symbols-outlined" style="font-size:16px;">person</span>
-                <span>Cambiar Piloto</span>
+                <span>Cambiar Participante</span>
               </button>
             </div>
           </div>
@@ -424,8 +376,8 @@
           <table class="admin-table">
             <thead>
               <tr>
-                <th>Piloto</th>
-                <th>Rol</th>
+                <th>Participante</th>
+                <th>Email</th>
                 <th>Nivel</th>
                 <th>Reac.</th>
                 <th>Acierto</th>
