@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
@@ -301,76 +301,165 @@
   </div>
 
   <!-- ===============================================================
-       ADMIN MODAL / PANEL
+       ADMIN MODAL / PANEL (FORMATO PC PARA EL STAND)
        =============================================================== -->
   <div class="admin-modal-overlay" id="admin-modal">
-    <div class="admin-modal-card">
-      <div class="modal-header-row">
-        <div class="modal-title">
-          <span class="material-symbols-outlined" style="color:var(--accent-cyan);">admin_panel_settings</span>
-          <span>Panel de Stand Vial</span>
+    <div class="admin-modal-card admin-pc-window">
+      
+      <!-- HEADER PC -->
+      <div class="admin-pc-header">
+        <div class="admin-pc-brand">
+          <img src="assets/brand/logo_ba.png" alt="BA Ciudad" class="admin-ba-logo" onerror="this.style.display='none'">
+          <div class="admin-pc-titles">
+            <div class="admin-pc-badge-row">
+              <span class="admin-sys-tag">PANEL DE CONTROL &bull; STAND VIAL</span>
+              <span class="admin-live-tag"><span class="live-dot"></span> EN VIVO</span>
+            </div>
+            <h2 class="admin-pc-title">Monitoreo de Participantes y M&eacute;tricas</h2>
+          </div>
         </div>
-        <button type="button" class="header-icon-btn" id="btn-close-admin" title="Cerrar Panel">
-          <span class="material-symbols-outlined">close</span>
-        </button>
+
+        <div class="admin-header-actions">
+          <div class="admin-hint-pill">
+            <span class="material-symbols-outlined" style="font-size:14px;">keyboard</span>
+            <span>Atajo: <strong>Ctrl + A</strong></span>
+          </div>
+          <button type="button" class="btn-close-pc-admin" id="btn-close-admin" title="Cerrar Panel (Esc)">
+            <span class="material-symbols-outlined">close</span>
+            <span class="btn-text-pc">Cerrar Panel</span>
+          </button>
+        </div>
       </div>
 
-      <!-- Password auth view -->
-      <div id="admin-auth-view" style="display:flex;flex-direction:column;gap:10px;">
-        <p style="font-size:12px;color:var(--text-muted);">Ingres&aacute; la clave de operador para ver m&eacute;tricas y exportar:</p>
-        <div class="input-box-wrap">
-          <span class="material-symbols-outlined">lock</span>
-          <input type="password" id="input-admin-pass" class="text-input" placeholder="Clave de acceso">
+      <!-- Password auth view (PC Centered Box) -->
+      <div id="admin-auth-view" class="admin-pc-auth-wrap">
+        <div class="admin-auth-card">
+          <div class="auth-icon-wrap">
+            <span class="material-symbols-outlined" style="font-size:28px;">lock_open</span>
+          </div>
+          <h3 class="auth-card-title">Acceso Operador del Stand</h3>
+          <p class="auth-card-desc">Ingres&aacute; la clave de administrador para acceder a las estad&iacute;sticas completas del stand, listado de participantes y exportaci&oacute;n a Excel.</p>
+          <div class="input-box-wrap" style="width:100%;margin:14px 0 6px;">
+            <span class="material-symbols-outlined">key</span>
+            <input type="password" id="input-admin-pass" class="text-input" placeholder="Clave de operador (vial2026)">
+          </div>
+          <div id="admin-auth-error" class="admin-auth-err">Clave incorrecta. Clave predeterminada: <code>vial2026</code></div>
+          <button type="button" class="btn-login-submit" id="btn-submit-admin-auth" style="margin-top:12px;width:100%;">
+            <span class="material-symbols-outlined">login</span>
+            <span>Ingresar al Panel del Stand</span>
+          </button>
         </div>
-        <button type="button" class="btn-login-submit" id="btn-submit-admin-auth">Acceder</button>
-        <div id="admin-auth-error" style="color:var(--accent-red);font-size:11px;display:none;text-align:center;">Clave incorrecta (predeterminada: vial2026)</div>
       </div>
 
-      <!-- Protected Admin Content -->
-      <div id="admin-content-view" style="display:none;flex-direction:column;gap:12px;">
-        <div class="admin-metrics-row">
-          <div class="metric-pill">
-            <div class="metric-num" id="admin-stat-total">0</div>
-            <div class="metric-tag">Participantes</div>
+      <!-- Protected Admin Content (Formato PC) -->
+      <div id="admin-content-view" class="admin-pc-content" style="display:none;">
+        
+        <!-- 4 Widescreen KPI Metric Cards -->
+        <div class="admin-kpi-grid">
+          <div class="kpi-card">
+            <div class="kpi-icon-wrap cyan">
+              <span class="material-symbols-outlined">group</span>
+            </div>
+            <div class="kpi-info">
+              <span class="kpi-label">Total Participantes</span>
+              <span class="kpi-value" id="admin-stat-total">0</span>
+              <span class="kpi-sub">Evaluaciones registradas</span>
+            </div>
           </div>
-          <div class="metric-pill">
-            <div class="metric-num" id="admin-stat-best">0.00s</div>
-            <div class="metric-tag">R&eacute;cord</div>
+
+          <div class="kpi-card">
+            <div class="kpi-icon-wrap green">
+              <span class="material-symbols-outlined">emoji_events</span>
+            </div>
+            <div class="kpi-info">
+              <span class="kpi-label">R&eacute;cord del Stand</span>
+              <span class="kpi-value text-green" id="admin-stat-best">0.00s</span>
+              <span class="kpi-sub">Tiempo m&aacute;s r&aacute;pido</span>
+            </div>
           </div>
-          <div class="metric-pill">
-            <div class="metric-num" id="admin-stat-avg">0.00s</div>
-            <div class="metric-tag">Promedio</div>
+
+          <div class="kpi-card">
+            <div class="kpi-icon-wrap yellow">
+              <span class="material-symbols-outlined">speed</span>
+            </div>
+            <div class="kpi-info">
+              <span class="kpi-label">Tiempo Promedio</span>
+              <span class="kpi-value text-yellow" id="admin-stat-avg">0.00s</span>
+              <span class="kpi-sub">Media general del stand</span>
+            </div>
+          </div>
+
+          <div class="kpi-card">
+            <div class="kpi-icon-wrap purple">
+              <span class="material-symbols-outlined">verified</span>
+            </div>
+            <div class="kpi-info">
+              <span class="kpi-label">Tasa de Acierto</span>
+              <span class="kpi-value text-purple" id="admin-stat-acc">100%</span>
+              <span class="kpi-sub">Precisi&oacute;n psicomotriz</span>
+            </div>
           </div>
         </div>
 
-        <div class="admin-table-wrap">
-          <table class="admin-table">
+        <!-- Desktop Action & Search Toolbar -->
+        <div class="admin-pc-toolbar">
+          <div class="toolbar-left">
+            <div class="search-input-wrap">
+              <span class="material-symbols-outlined">search</span>
+              <input type="text" id="admin-search-input" placeholder="Buscar por participante o email...">
+            </div>
+            <div class="filter-level-group" id="admin-level-filters">
+              <button type="button" class="lvl-filter-btn active" data-filter="all">Todos</button>
+              <button type="button" class="lvl-filter-btn" data-filter="1">1. Colores</button>
+              <button type="button" class="lvl-filter-btn" data-filter="2">2. Decisiones</button>
+              <button type="button" class="lvl-filter-btn" data-filter="3">3. Celular</button>
+            </div>
+          </div>
+
+          <div class="toolbar-right">
+            <button type="button" class="btn-pc-action export" id="btn-admin-export">
+              <span class="material-symbols-outlined">download</span>
+              <span>Exportar a Excel (CSV)</span>
+            </button>
+            <button type="button" class="btn-pc-action danger" id="btn-admin-clear">
+              <span class="material-symbols-outlined">delete_sweep</span>
+              <span>Borrar Historial</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Desktop Table Container -->
+        <div class="admin-pc-table-wrap">
+          <table class="admin-pc-table">
             <thead>
               <tr>
+                <th style="width:45px;">#</th>
+                <th style="width:145px;">Fecha y Hora</th>
                 <th>Participante</th>
-                <th>Email</th>
-                <th>Nivel</th>
-                <th>Reac.</th>
-                <th>Acierto</th>
+                <th>Email / Contacto</th>
+                <th style="width:155px;">Nivel Evaluado</th>
+                <th style="width:130px;">T. Promedio</th>
+                <th style="width:115px;">Mejor Reacc.</th>
+                <th style="width:95px;">Aciertos</th>
               </tr>
             </thead>
             <tbody id="admin-table-body">
               <tr>
-                <td colspan="5" style="text-align:center;color:var(--text-muted);padding:14px;">No hay registros a&uacute;n.</td>
+                <td colspan="8" style="text-align:center;color:var(--text-muted);padding:26px;">No hay registros a&uacute;n.</td>
               </tr>
             </tbody>
           </table>
         </div>
 
-        <button type="button" class="btn-admin-action export" id="btn-admin-export">
-          <span class="material-symbols-outlined">download</span>
-          <span>Exportar a Excel / CSV</span>
-        </button>
+        <!-- PC Footer -->
+        <div class="admin-pc-footer">
+          <div class="footer-note">
+            <span class="material-symbols-outlined" style="font-size:16px;">devices</span>
+            <span>Estaci&oacute;n local de stand &bull; Datos guardados en este equipo</span>
+          </div>
+          <div class="records-counter" id="admin-records-count">0 registros</div>
+        </div>
 
-        <button type="button" class="btn-admin-action" id="btn-admin-clear" style="color:var(--accent-red);border-color:rgba(255,68,68,0.3);">
-          <span class="material-symbols-outlined">delete_sweep</span>
-          <span>Borrar Historial</span>
-        </button>
       </div>
 
     </div>

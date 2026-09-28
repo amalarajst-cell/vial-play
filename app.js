@@ -1,4 +1,4 @@
-﻿/**
+/**
  * ============================================================================
  * VIAL PLAY - TEST DE TIEMPO DE REACCION
  * Mobile-First Road Safety Reaction Assessment | GCBA
@@ -477,6 +477,10 @@
   const adminStatTotal = document.getElementById('admin-stat-total');
   const adminStatBest = document.getElementById('admin-stat-best');
   const adminStatAvg = document.getElementById('admin-stat-avg');
+  const adminStatAcc = document.getElementById('admin-stat-acc');
+  const adminSearchInput = document.getElementById('admin-search-input');
+  const adminRecordsCount = document.getElementById('admin-records-count');
+  const adminLevelFilters = document.getElementById('admin-level-filters');
   const adminTableBody = document.getElementById('admin-table-body');
   const btnAdminExport = document.getElementById('btn-admin-export');
   const btnAdminClear = document.getElementById('btn-admin-clear');
@@ -1151,6 +1155,9 @@
     });
   }
 
+  let adminActiveFilter = 'all';
+  let adminSearchQuery = '';
+
   if (btnCloseAdmin) {
     btnCloseAdmin.addEventListener('click', () => {
       adminModal.classList.remove('active');
@@ -1165,6 +1172,12 @@
     });
   }
 
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && adminModal && adminModal.classList.contains('active')) {
+      adminModal.classList.remove('active');
+    }
+  });
+
   btnSubmitAdminAuth.addEventListener('click', () => {
     const inputVal = inputAdminPass.value.trim();
     const storedPwd = localStorage.getItem(STORAGE_ADMIN_PWD) || DEFAULT_ADMIN_PWD;
@@ -1178,34 +1191,124 @@
     }
   });
 
+  if (adminSearchInput) {
+    adminSearchInput.addEventListener('input', (e) => {
+      adminSearchQuery = e.target.value.trim().toLowerCase();
+      renderAdminDashboard();
+    });
+  }
+
+  if (adminLevelFilters) {
+    adminLevelFilters.addEventListener('click', (e) => {
+      const btn = e.target.closest('.lvl-filter-btn');
+      if (!btn) return;
+      adminLevelFilters.querySelectorAll('.lvl-filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      adminActiveFilter = btn.dataset.filter || 'all';
+      renderAdminDashboard();
+    });
+  }
+
   function renderAdminDashboard() {
     try {
       const raw = localStorage.getItem(STORAGE_SESSIONS);
       const list = raw ? JSON.parse(raw) : [];
 
-      adminStatTotal.textContent = list.length;
+      if (adminStatTotal) adminStatTotal.textContent = list.length;
 
       if (list.length > 0) {
         const bests = list.map(item => Number(item.bestTime) || 99).filter(n => n > 0 && n < 90);
         const avgs = list.map(item => Number(item.avgTime) || 0).filter(n => n > 0);
 
-        adminStatBest.textContent = bests.length ? (Math.min(...bests).toFixed(2) + 's') : '0.00s';
-        const totalAvg = avgs.length ? (avgs.reduce((a, b) => a + b, 0) / avgs.length).toFixed(2) : '0.00';
-        adminStatAvg.textContent = totalAvg + 's';
+        if (adminStatBest) {
+          adminStatBest.textContent = bests.length ? (Math.min(...bests).toFixed(2) + 's') : '0.00s';
+        }
+        if (adminStatAvg) {
+          const totalAvg = avgs.length ? (avgs.reduce((a, b) => a + b, 0) / avgs.length).toFixed(2) : '0.00';
+          adminStatAvg.textContent = totalAvg + 's';
+        }
 
-        adminTableBody.innerHTML = list.slice(0, 50).map(item => `
-          <tr>
-            <td style="font-weight:700;">${escapeHtml(item.player)}</td>
-            <td style="color:var(--text-muted);">${escapeHtml(item.email || '-')}</td>
-            <td>Nivel ${item.level}</td>
-            <td style="color:var(--accent-cyan);font-weight:700;">${item.avgTime}s</td>
-            <td style="color:var(--accent-green);">${item.accuracy}</td>
-          </tr>
-        `).join('');
+        if (adminStatAcc) {
+          let totalHits = 0;
+          let totalTrials = 0;
+          list.forEach(item => {
+            if (typeof item.accuracy === 'string' && item.accuracy.includes('/')) {
+              const parts = item.accuracy.split('/').map(Number);
+              if (parts.length === 2 && !isNaN(parts[0]) && !isNaN(parts[1]) && parts[1] > 0) {
+                totalHits += parts[0];
+                totalTrials += parts[1];
+              }
+            }
+          });
+          const accPct = totalTrials > 0 ? Math.round((totalHits / totalTrials) * 100) : 100;
+          adminStatAcc.textContent = accPct + '%';
+        }
       } else {
-        adminStatBest.textContent = '0.00s';
-        adminStatAvg.textContent = '0.00s';
-        adminTableBody.innerHTML = '<tr><td colspan="5" style="text-align:center;color:var(--text-muted);padding:14px;">No hay registros a\u00FAn.</td></tr>';
+        if (adminStatBest) adminStatBest.textContent = '0.00s';
+        if (adminStatAvg) adminStatAvg.textContent = '0.00s';
+        if (adminStatAcc) adminStatAcc.textContent = '100%';
+      }
+
+      // Filter by level and search query
+      const filtered = list.filter(item => {
+        if (adminActiveFilter !== 'all' && String(item.level) !== String(adminActiveFilter)) {
+          return false;
+        }
+        if (adminSearchQuery) {
+          const p = (item.player || '').toLowerCase();
+          const em = (item.email || '').toLowerCase();
+          const d = (item.date || '').toLowerCase();
+          if (!p.includes(adminSearchQuery) && !em.includes(adminSearchQuery) && !d.includes(adminSearchQuery)) {
+            return false;
+          }
+        }
+        return true;
+      });
+
+      if (adminRecordsCount) {
+        adminRecordsCount.textContent = `${filtered.length} de ${list.length} registros`;
+      }
+
+      if (filtered.length > 0) {
+        adminTableBody.innerHTML = filtered.map((item, idx) => {
+          const avgNum = Number(item.avgTime) || 0;
+          let speedClass = 'badge-speed-mid';
+          if (avgNum > 0 && avgNum < 0.50) speedClass = 'badge-speed-fast';
+          else if (avgNum >= 0.70) speedClass = 'badge-speed-slow';
+
+          let lvlName = 'Nivel ' + (item.level || '1');
+          let lvlClass = 'badge-lvl-1';
+          if (String(item.level) === '2') {
+            lvlName = '2. Decisiones';
+            lvlClass = 'badge-lvl-2';
+          } else if (String(item.level) === '3') {
+            lvlName = '3. Celular';
+            lvlClass = 'badge-lvl-3';
+          } else {
+            lvlName = '1. Colores';
+            lvlClass = 'badge-lvl-1';
+          }
+
+          return `
+            <tr>
+              <td style="color:var(--text-dim);font-weight:700;">${idx + 1}</td>
+              <td style="font-size:11px;color:var(--text-muted);">${escapeHtml(item.date || '-')}</td>
+              <td style="font-weight:700;">
+                <div style="display:flex;align-items:center;gap:6px;">
+                  <span class="material-symbols-outlined" style="font-size:16px;color:var(--accent-cyan);">person</span>
+                  <span>${escapeHtml(item.player)}</span>
+                </div>
+              </td>
+              <td style="color:var(--text-muted);">${escapeHtml(item.email || '-')}</td>
+              <td><span class="badge-lvl ${lvlClass}">${lvlName}</span></td>
+              <td><span class="badge-speed ${speedClass}">${item.avgTime}s</span></td>
+              <td style="font-family:var(--font-condensed);font-weight:700;color:var(--accent-cyan);font-size:13px;">${item.bestTime}s</td>
+              <td><span style="font-weight:700;color:var(--accent-green);font-size:12px;">${item.accuracy}</span></td>
+            </tr>
+          `;
+        }).join('');
+      } else {
+        adminTableBody.innerHTML = '<tr><td colspan="8" style="text-align:center;color:var(--text-muted);padding:24px;">No se encontraron registros coincidentes.</td></tr>';
       }
     } catch (e) {
       console.warn('Error rendering admin stats', e);
