@@ -73,7 +73,6 @@
         osc.start(now);
         osc.stop(now + 0.16);
       } else if (type === 'distraction_wa') {
-        // Sonido de notificaciÃ³n de WhatsApp
         [880, 1174].forEach((f, idx) => {
           const osc = ctx.createOscillator();
           const gain = ctx.createGain();
@@ -397,12 +396,12 @@
   // ==========================================================================
   // 4. GAME ENGINE STATE
   // ==========================================================================
-  let currentLevel = 1; // 1, 2, 3
+  let currentLevel = 1;
   let totalRoundsForLevel = 5;
   let currentRoundIdx = 0;
   let activeStimuliQueue = [];
   let currentStimulus = null;
-  let state = 'idle'; // 'idle', 'waiting', 'active', 'feedback', 'finished'
+  let state = 'idle';
   let stimulusStartTime = 0;
   let liveTimerRaf = null;
   let waitTimer = null;
@@ -410,7 +409,7 @@
   let timeoutWatchdog = null;
   let timeoutSec = 2.40;
 
-  const gameHistory = []; // { stimulus, playerAction, correct, timeSec, hadDistraction }
+  const gameHistory = [];
 
   // DOM Elements
   const screenLogin = document.getElementById('screen-login');
@@ -421,8 +420,6 @@
 
   const headerPlayerChip = document.getElementById('header-player-chip');
   const headerPlayerName = document.getElementById('header-player-name');
-  const testPlayerName = document.getElementById('test-player-name');
-  const btnLogout = document.getElementById('btn-logout');
   const btnBackLogin = document.getElementById('btn-back-login');
 
   const btnToggleSound = document.getElementById('btn-toggle-sound');
@@ -498,18 +495,17 @@
         email: email.trim(),
         isLoggedIn: true
       };
-      inputPlayerName.value = currentPlayer.name;
-      inputPlayerEmail.value = currentPlayer.email;
+      if (inputPlayerName) inputPlayerName.value = currentPlayer.name;
+      if (inputPlayerEmail) inputPlayerEmail.value = currentPlayer.email;
     }
   }
 
   function updatePlayerUI() {
     if (currentPlayer.isLoggedIn) {
-      headerPlayerChip.style.display = 'inline-flex';
-      headerPlayerName.textContent = currentPlayer.name;
-      testPlayerName.textContent = currentPlayer.name;
+      if (headerPlayerChip) headerPlayerChip.style.display = 'inline-flex';
+      if (headerPlayerName) headerPlayerName.textContent = currentPlayer.name;
     } else {
-      headerPlayerChip.style.display = 'none';
+      if (headerPlayerChip) headerPlayerChip.style.display = 'none';
     }
   }
 
@@ -563,9 +559,8 @@
     showSection('login');
   }
 
-  btnLogout.addEventListener('click', handleLogout);
-  btnBackLogin.addEventListener('click', handleLogout);
-  headerPlayerChip.addEventListener('click', handleLogout);
+  if (btnBackLogin) btnBackLogin.addEventListener('click', handleLogout);
+  if (headerPlayerChip) headerPlayerChip.addEventListener('click', handleLogout);
 
   // Sound toggle
   btnToggleSound.addEventListener('click', () => {
@@ -605,7 +600,6 @@
     actionsGrid.innerHTML = '';
 
     if (lvl === 1) {
-      // NIVEL 1: 4 COLORES
       actionsGrid.innerHTML = `
         <button type="button" class="btn-action btn-color-rojo disabled" data-action="rojo" id="btn-act-1">
           <span class="btn-key-hint">R</span>
@@ -633,7 +627,6 @@
         </button>
       `;
     } else {
-      // NIVEL 2 y 3: 4 ACCIONES VIALES
       actionsGrid.innerHTML = `
         <button type="button" class="btn-action btn-vial-frenar disabled" data-action="frenar" id="btn-act-1">
           <span class="btn-key-hint">F</span>
@@ -670,7 +663,6 @@
     });
   }
 
-  // Shuffle buttons on Level 3 (Cognitive distraction)
   function shuffleActionButtons() {
     const btns = Array.from(actionsGrid.querySelectorAll('.btn-action'));
     for (let i = btns.length - 1; i > 0; i--) {
@@ -709,7 +701,6 @@
     });
   }
 
-  // Tab switching
   function setLevel(lvl) {
     currentLevel = lvl;
     [tabLvl1, tabLvl2, tabLvl3].forEach((tab, i) => {
