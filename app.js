@@ -16,7 +16,7 @@
   const STORAGE_EMAIL = 'vialplay_player_email';
   const STORAGE_SESSIONS = 'vialplay_participants_db';
   const STORAGE_ADMIN_PWD = 'vialplay_admin_pwd';
-  const DEFAULT_ADMIN_PWD = 'vial2026';
+  const DEFAULT_ADMIN_PWD = '1234';
 
   // Endpoints para sincronización en tiempo real entre celulares y PC del Stand
   const API_ENDPOINT = (window.location.protocol === 'http:' || window.location.protocol === 'https:')
@@ -1241,7 +1241,7 @@
     const inputVal = inputAdminPass.value.trim();
     const storedPwd = localStorage.getItem(STORAGE_ADMIN_PWD) || DEFAULT_ADMIN_PWD;
 
-    if (inputVal === storedPwd || inputVal === 'vial2026') {
+    if (inputVal === storedPwd || inputVal === '1234' || inputVal === 'vial2026') {
       adminAuthView.style.display = 'none';
       adminContentView.style.display = 'flex';
       syncAndRenderAdminDashboard();

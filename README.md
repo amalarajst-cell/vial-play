@@ -1,4 +1,4 @@
-﻿# VIAL PLAY - Test de Tiempo de Reacción (Mobile First) 📱⚡
+# VIAL PLAY - Test de Tiempo de Reacción (Mobile First) 📱⚡
 ### Stand de Seguridad Vial | Gobierno de la Ciudad de Buenos Aires
 
 **Dirección General de Seguridad Vial**  
@@ -56,7 +56,7 @@ Cuenta con **3 niveles interactivos**:
 ---
 
 ### 4. Panel de Administración y Stand
-- Clave de operador: `vial2026`
+- Clave de operador: `1234`
 - Contador de participantes, récord del stand y promedio general.
 - Historial completo en vivo.
 - Exportación a planilla **Excel / CSV** con codificación UTF-8 BOM.
