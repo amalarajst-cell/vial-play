@@ -18,6 +18,14 @@
   const STORAGE_ADMIN_PWD = 'vialplay_admin_pwd';
   const DEFAULT_ADMIN_PWD = 'vial2026';
 
+  // Endpoints para sincronización en tiempo real entre celulares y PC del Stand
+  const API_ENDPOINT = (window.location.protocol === 'http:' || window.location.protocol === 'https:')
+    ? '/api/sessions'
+    : 'http://localhost:8080/api/sessions';
+  const API_CLEAR_ENDPOINT = (window.location.protocol === 'http:' || window.location.protocol === 'https:')
+    ? '/api/sessions/clear'
+    : 'http://localhost:8080/api/sessions/clear';
+
   let currentPlayer = {
     name: '',
     email: '',
@@ -1091,8 +1099,9 @@
     initGameForCurrentLevel();
   });
 
-  function saveSessionRecord(record) {
+  async function saveSessionRecord(record) {
     try {
+      // 1. Guardar en almacenamiento local del dispositivo
       const stored = localStorage.getItem(STORAGE_SESSIONS);
       const db = stored ? JSON.parse(stored) : [];
       db.unshift(record);
@@ -1100,6 +1109,17 @@
       localStorage.setItem(STORAGE_SESSIONS, JSON.stringify(db));
     } catch (e) {
       console.warn('Error saving session to local storage', e);
+    }
+
+    // 2. Enviar a la PC central del stand (server.ps1) en tiempo real
+    try {
+      await fetch(API_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(record)
+      });
+    } catch (e) {
+      // Si el servidor local no está corriendo o está offline, continúa en modo local
     }
   }
 
@@ -1157,10 +1177,28 @@
 
   let adminActiveFilter = 'all';
   let adminSearchQuery = '';
+  let adminPollTimer = null;
+
+  function startAdminPolling() {
+    stopAdminPolling();
+    adminPollTimer = setInterval(() => {
+      if (adminModal && adminModal.classList.contains('active') && adminContentView && adminContentView.style.display !== 'none') {
+        syncAndRenderAdminDashboard();
+      }
+    }, 3000);
+  }
+
+  function stopAdminPolling() {
+    if (adminPollTimer) {
+      clearInterval(adminPollTimer);
+      adminPollTimer = null;
+    }
+  }
 
   if (btnCloseAdmin) {
     btnCloseAdmin.addEventListener('click', () => {
       adminModal.classList.remove('active');
+      stopAdminPolling();
     });
   }
 
@@ -1168,6 +1206,7 @@
     adminModal.addEventListener('click', (e) => {
       if (e.target === adminModal) {
         adminModal.classList.remove('active');
+        stopAdminPolling();
       }
     });
   }
@@ -1175,6 +1214,7 @@
   window.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && adminModal && adminModal.classList.contains('active')) {
       adminModal.classList.remove('active');
+      stopAdminPolling();
     }
   });
 
@@ -1185,11 +1225,28 @@
     if (inputVal === storedPwd || inputVal === 'vial2026') {
       adminAuthView.style.display = 'none';
       adminContentView.style.display = 'flex';
-      renderAdminDashboard();
+      syncAndRenderAdminDashboard();
+      startAdminPolling();
     } else {
       adminAuthError.style.display = 'block';
     }
   });
+
+  async function syncAndRenderAdminDashboard() {
+    renderAdminDashboard();
+    try {
+      const res = await fetch(API_ENDPOINT, { cache: 'no-store' });
+      if (res.ok) {
+        const serverList = await res.json();
+        if (Array.isArray(serverList)) {
+          localStorage.setItem(STORAGE_SESSIONS, JSON.stringify(serverList));
+          renderAdminDashboard(serverList);
+        }
+      }
+    } catch (e) {
+      // Sin conexión con el servidor: se mantiene con el almacenamiento local
+    }
+  }
 
   if (adminSearchInput) {
     adminSearchInput.addEventListener('input', (e) => {
@@ -1209,11 +1266,13 @@
     });
   }
 
-  function renderAdminDashboard() {
+  function renderAdminDashboard(customList) {
     try {
-      const raw = localStorage.getItem(STORAGE_SESSIONS);
-      const list = raw ? JSON.parse(raw) : [];
-
+      let list = customList;
+      if (!list) {
+        const raw = localStorage.getItem(STORAGE_SESSIONS);
+        list = raw ? JSON.parse(raw) : [];
+      }
       if (adminStatTotal) adminStatTotal.textContent = list.length;
 
       if (list.length > 0) {
@@ -1381,10 +1440,13 @@
     }
   });
 
-  btnAdminClear.addEventListener('click', () => {
-    if (confirm('\u00BFEst\u00E1s seguro de que dese\u00E1s borrar todo el historial del stand? Esta acci\u00F3n no se puede deshacer.')) {
+  btnAdminClear.addEventListener('click', async () => {
+    if (confirm('¿Estás seguro de que deseás borrar todo el historial del stand? Esta acción no se puede deshacer.')) {
       localStorage.removeItem(STORAGE_SESSIONS);
-      renderAdminDashboard();
+      try {
+        await fetch(API_CLEAR_ENDPOINT, { method: 'POST' });
+      } catch (e) {}
+      syncAndRenderAdminDashboard();
     }
   });
 
