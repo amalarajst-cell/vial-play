@@ -557,6 +557,17 @@
     localStorage.setItem(STORAGE_NAME, currentPlayer.name);
     localStorage.setItem(STORAGE_EMAIL, currentPlayer.email);
 
+    // Registrar inmediatamente en el Panel Admin el ingreso del alumno
+    saveSessionRecord({
+      player: currentPlayer.name,
+      email: currentPlayer.email || 'Sin email',
+      level: 1,
+      avgTime: '--',
+      bestTime: '--',
+      accuracy: 'Iniciado',
+      date: new Date().toLocaleString('es-AR')
+    });
+
     getAudioContext();
     playSound('correct');
     showSection('test');
@@ -1103,8 +1114,16 @@
     try {
       // 1. Guardar en almacenamiento local del dispositivo
       const stored = localStorage.getItem(STORAGE_SESSIONS);
-      const db = stored ? JSON.parse(stored) : [];
-      db.unshift(record);
+      let db = stored ? JSON.parse(stored) : [];
+
+      // Si el participante ya figuraba como "Iniciado" y ahora completó el nivel, actualizamos ese registro
+      const existingIdx = db.findIndex(r => r.player === record.player && r.accuracy === 'Iniciado');
+      if (existingIdx !== -1 && record.accuracy !== 'Iniciado') {
+        db[existingIdx] = record;
+      } else {
+        db.unshift(record);
+      }
+
       if (db.length > 500) db.pop();
       localStorage.setItem(STORAGE_SESSIONS, JSON.stringify(db));
     } catch (e) {
@@ -1341,11 +1360,11 @@
         adminTableBody.innerHTML = filtered.map((item, idx) => {
           let avgNum = Number(item.avgTime) || 0;
           if (avgNum > 100) avgNum = avgNum / 1000;
-          const avgDisplay = avgNum > 0 ? avgNum.toFixed(2) + 's' : '-';
+          const avgDisplay = avgNum > 0 ? avgNum.toFixed(2) + 's' : (item.avgTime || '-');
 
           let bestNum = Number(item.bestTime) || 0;
           if (bestNum > 100) bestNum = bestNum / 1000;
-          const bestDisplay = bestNum > 0 ? bestNum.toFixed(2) + 's' : '-';
+          const bestDisplay = bestNum > 0 ? bestNum.toFixed(2) + 's' : (item.bestTime || '-');
 
           let speedClass = 'badge-speed-mid';
           if (avgNum > 0 && avgNum < 0.50) speedClass = 'badge-speed-fast';
@@ -1364,6 +1383,11 @@
             lvlClass = 'badge-lvl-1';
           }
 
+          let accBadge = `<span style="font-weight:700;color:var(--accent-green);font-size:12px;">${escapeHtml(item.accuracy)}</span>`;
+          if (item.accuracy === 'Iniciado') {
+            accBadge = `<span style="display:inline-flex;align-items:center;gap:4px;padding:3px 8px;border-radius:6px;background:rgba(255,198,0,0.15);color:#ffd54f;font-weight:800;font-size:11px;">● Jugando</span>`;
+          }
+
           return `
             <tr>
               <td style="color:var(--text-dim);font-weight:700;">${idx + 1}</td>
@@ -1378,7 +1402,7 @@
               <td><span class="badge-lvl ${lvlClass}">${lvlName}</span></td>
               <td><span class="badge-speed ${speedClass}">${avgDisplay}</span></td>
               <td style="font-family:var(--font-condensed);font-weight:700;color:var(--accent-cyan);font-size:13px;">${bestDisplay}</td>
-              <td><span style="font-weight:700;color:var(--accent-green);font-size:12px;">${item.accuracy}</span></td>
+              <td>${accBadge}</td>
             </tr>
           `;
         }).join('');
