@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cartel QR Alumnos - VIAL PLAY</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800;900&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: #0d1114;
+      color: #ffffff;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .print-bar {
+      margin-bottom: 20px;
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .btn-print {
+      background: #8de2d6;
+      color: #0d1114;
+      border: none;
+      padding: 10px 22px;
+      font-size: 15px;
+      font-weight: 800;
+      border-radius: 10px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: transform 0.15s ease, background 0.15s ease;
+      font-family: inherit;
+    }
+
+    .btn-print:hover {
+      background: #a9ede4;
+      transform: translateY(-2px);
+    }
+
+    /* Flyer Card */
+    .flyer {
+      width: 100%;
+      max-width: 580px;
+      background: #141a1e;
+      border: 2px solid rgba(141, 226, 214, 0.3);
+      border-radius: 24px;
+      padding: 36px 32px;
+      text-align: center;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .flyer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 6px;
+      background: linear-gradient(90deg, #8de2d6, #ffc600, #ff5252);
+    }
+
+    .flyer-header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .logo-ba {
+      height: 38px;
+      object-fit: contain;
+    }
+
+    .tag-stand {
+      background: rgba(141, 226, 214, 0.15);
+      color: #8de2d6;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      padding: 4px 10px;
+      border-radius: 20px;
+      text-transform: uppercase;
+    }
+
+    .title-main {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 42px;
+      font-weight: 900;
+      letter-spacing: 0.5px;
+      line-height: 1.05;
+      text-transform: uppercase;
+      color: #ffffff;
+      margin-bottom: 6px;
+    }
+
+    .title-main span {
+      color: #ffc600;
+    }
+
+    .subtitle {
+      font-size: 14px;
+      color: #9aa6ac;
+      margin-bottom: 24px;
+      font-weight: 600;
+    }
+
+    /* QR Box */
+    .qr-container {
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 18px;
+      display: inline-block;
+      margin: 0 auto 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    }
+
+    .qr-container img {
+      width: 250px;
+      height: 250px;
+      display: block;
+      border-radius: 8px;
+    }
+
+    .qr-url-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      padding: 6px 16px;
+      border-radius: 30px;
+      font-size: 13px;
+      font-weight: 700;
+      color: #8de2d6;
+      margin-bottom: 24px;
+    }
+
+    /* Steps */
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 24px;
+      text-align: center;
+    }
+
+    .step-item {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 14px;
+      padding: 12px 10px;
+    }
+
+    .step-num {
+      width: 26px;
+      height: 26px;
+      background: #ffc600;
+      color: #000000;
+      font-weight: 900;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      margin: 0 auto 8px;
+    }
+
+    .step-text {
+      font-size: 12px;
+      color: #cfd8dc;
+      line-height: 1.3;
+      font-weight: 600;
+    }
+
+    /* Footer */
+    .flyer-footer {
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding-top: 14px;
+      font-size: 12px;
+      color: #78909c;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .flyer-footer strong {
+      color: #ffffff;
+    }
+
+    /* Print rules for clean sheet printing */
+    @media print {
+      body {
+        background: #ffffff !important;
+        color: #000000 !important;
+        padding: 0;
+      }
+      .print-bar {
+        display: none !important;
+      }
+      .flyer {
+        max-width: 100%;
+        border: 2px solid #333;
+        box-shadow: none;
+        background: #ffffff !important;
+        color: #000000 !important;
+        border-radius: 0;
+        padding: 40px;
+      }
+      .title-main {
+        color: #000000 !important;
+      }
+      .title-main span {
+        color: #d97706 !important;
+      }
+      .subtitle {
+        color: #4b5563 !important;
+      }
+      .step-item {
+        border-color: #cbd5e1 !important;
+        background: #f8fafc !important;
+      }
+      .step-text {
+        color: #1e293b !important;
+      }
+      .qr-url-pill {
+        border-color: #94a3b8 !important;
+        color: #0f172a !important;
+        background: #f1f5f9 !important;
+      }
+      .flyer-footer {
+        color: #64748b !important;
+        border-top-color: #e2e8f0 !important;
+      }
+      .flyer-footer strong {
+        color: #0f172a !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="print-bar">
+    <button class="btn-print" onclick="window.print()">
+      <span class="material-symbols-outlined">print</span>
+      <span>Imprimir Cartel (Ctrl + P)</span>
+    </button>
+  </div>
+
+  <div class="flyer">
+    <div class="flyer-header">
+      <img src="assets/brand/logo_ba.png" alt="Buenos Aires Ciudad" class="logo-ba">
+      <span class="tag-stand">Seguridad Vial</span>
+    </div>
+
+    <h1 class="title-main">VIAL PLAY <span>DESAF&Iacute;O</span></h1>
+    <p class="subtitle">Test de Tiempo de Reacci&oacute;n y Conducci&oacute;n Segura</p>
+
+    <!-- QR Code Image -->
+    <div class="qr-container">
+      <img src="qr_online_github.png" alt="C&oacute;digo QR Vial Play" id="qr-img">
+    </div>
+
+    <div>
+      <div class="qr-url-pill">
+        <span class="material-symbols-outlined" style="font-size:16px;">link</span>
+        <span>amalarajst-cell.github.io/vial-play</span>
+      </div>
+    </div>
+
+    <!-- Steps -->
+    <div class="steps-grid">
+      <div class="step-item">
+        <div class="step-num">1</div>
+        <div class="step-text">Abr&iacute; la c&aacute;mara de tu celular y escane&aacute; el QR</div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">2</div>
+        <div class="step-text">Ingres&aacute; tu nombre para registrarte en el stand</div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">3</div>
+        <div class="step-text">&iexcl;Med&iacute; tus reflejos en los 3 niveles viales!</div>
+      </div>
+    </div>
+
+    <div class="flyer-footer">
+      <span>Gobierno de la Ciudad de Buenos Aires</span>
+      <strong>Stand de Educaci&oacute;n Vial</strong>
+    </div>
+  </div>
+
+</body>
+</html>
